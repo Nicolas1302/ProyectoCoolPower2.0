@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>COOLPOWERrefrigeración | Soluciones de Climatización en CABA</title>
+    <meta name="description" content="Servicio técnico premium en CABA. Instalación y reparación de aires y lavarropas con estándares de calidad turística. Atención rápida y garantizada.">
+    <meta name="keywords" content="instalación aire acondicionado split CABA, reparación de lavarropas Buenos Aires, técnico aire acondicionado Capital Federal, mantenimiento split, COOLPOWERrefrigeración">
+    <meta name="robots" content="index, follow">
+    
+    <!-- BOOTSTRAP 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FUENTES ESTILO TRAVELER (Poppins como fuente única para estilo moderno) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           VARIABLES Y OVERRIDES - PALETA TRAVELER
+           ========================================= */
+        :root {
+            --primary: #003366; /* Azul Corporativo */
+            --accent: #FF6B35; /* Naranja Vibrante (Sunset) */
+            --text-dark: #2D3142;
+            --text-light: #90949C;
+            --white: #ffffff;
+            --bg-light: #F7F9FC;
+            
+            --font-heading: 'Poppins', sans-serif; /* Unificado */
+            --font-body: 'Poppins', sans-serif; /* Unificado */
+            
+            --radius: 12px;
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.12);
+            --transition: all 0.4s ease;
+        }
+
+        /* Reset básico y tipografía */
+        body {
+            font-family: var(--font-body); /* Aplicado a todo el cuerpo */
+            color: var(--text-dark);
+            background-color: var(--white);
+            padding-top: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 { 
+            font-family: var(--font-heading); 
+            color: var(--primary); 
+            font-weight: 700; /* Aseguramos que los títulos sean negrita */
+        }
+        
+        a { text-decoration: none; transition: var(--transition); }
+        img { max-width: 100%; height: auto; object-fit: cover; }
+
+        /* =========================================
+           MENU FLOTANTE BOOTSTRAP PERSONALIZADO
+           ========================================= */
+        .navbar-floating {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem; /* Padding ajustado para el logo */
+            transition: var(--transition);
+        }
+
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* Estilo para la imagen del Logo */
+        .logo-img {
+            height: 50px; /* Tamaño ajustado para el navbar */
+            width: auto;
+            border-radius: 8px;
+        }
+
+        /* Fallback si la imagen no carga (icono temporal) */
+        .logo-fallback {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .brand-text { display: inline-block; }
+        .brand-text span { color: var(--accent); }
+
+        .nav-link {
+            font-family: var(--font-body);
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            font-size: 0.95rem;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent) !important;
+        }
+
+        .btn-nav-cta {
+            background: linear-gradient(45deg, var(--primary), #00509E);
+            color: var(--white) !important;
+            border-radius: 30px;
+            padding: 8px 25px;
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 51, 102, 0.3);
+            color: var(--white) !important;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-floating {
+                border-radius: 15px;
+                padding: 0.8rem 1rem;
+                margin: 10px !important;
+            }
+            .navbar-collapse {
+                margin-top: 15px;
+                background: var(--white);
+                border-top: 1px solid #eee;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            .nav-link { margin: 8px 0; padding: 5px 0; border-bottom: 1px solid #f0f0f0; }
+            .btn-nav-cta { width: 100%; text-align: center; margin-top: 15px; }
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        #hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-image: url('https://images.unsplash.com/photo-1621905251189-fc015acafd03?auto=format&fit=crop&q=80');
+        }
+
+        @media (max-width: 768px) {
+            #hero { background-attachment: scroll; }
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active { opacity: 1; }
+
+        .hero-overlay {
+            /* MANTENEMOS ESTA CAPA COMO EL FONDO PRINCIPAL AZUL OSCURO */
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 20, 40, 0.8); /* Opacidad mayor para mejor legibilidad */
+            z-index: 1;
+        }
+
+        .hero-content {
+            /* Hacemos la caja de contenido transparente y sin padding interno */
+            background-color: transparent; 
+            padding: 0; 
+            border-radius: var(--radius);
+            box-shadow: none; 
+            
+            position: relative; 
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 20px; 
+            width: 100%;
+        }
+        
+        /* Contenedor interno para dar el padding que se eliminó de .hero-content */
+        .hero-inner {
+            background-color: rgba(0, 20, 40, 0.0); /* Usamos 0.0 para que sea transparente */
+            padding: 40px;
+            border-radius: var(--radius);
+        }
+
+        /* Estilo para el logo en la sección Hero */
+        .hero-logo-container {
+            margin-bottom: 25px;
+        }
+        .hero-logo {
+            width: 100px; 
+            height: 100px;
+            max-width: 100%; 
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Estilo para el nuevo subtitulo */
+        .hero-subheadline {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 1.3rem; 
+            color: var(--white);
+            opacity: 0.9;
+            margin-bottom: 40px; 
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            color: var(--white);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Ajuste de margin para el nuevo h1 */
+        .hero-content h1.brand-headline {
+            margin-bottom: 5px;
+            font-size: 3.5rem; 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 700; 
+            letter-spacing: 1px;
+        }
+        
+        .hero-search-box {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 50px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            max-width: 700px;
+            margin: 0 auto;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-input-group {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 5px 20px;
+            border-right: 1px solid #eee;
+            min-width: 180px;
+        }
+        
+        .hero-input-group:last-child { border-right: none; }
+        .hero-input-group i { color: var(--accent); margin-right: 15px; font-size: 1.2rem; }
+        
+        .hero-text { text-align: left; }
+        .hero-text span { display: block; font-size: 0.75rem; color: var(--text-light); font-weight: 600; text-transform: uppercase; }
+        .hero-text strong { color: var(--text-dark); font-size: 0.95rem; display: block; }
+
+        .hero-cta {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .hero-cta:hover { transform: rotate(90deg); background: var(--primary); color: #fff; }
+
+        @media (max-width: 768px) {
+            .hero-inner {
+                padding: 30px 20px;
+            }
+            .hero-content h1 { font-size: 2.5rem; margin-bottom: 15px; }
+            .hero-content h1.brand-headline { font-size: 2.2rem; }
+            .hero-subheadline { font-size: 1.1rem; margin-bottom: 30px; }
+            .hero-search-box { flex-direction: column; border-radius: 20px; gap: 0; padding: 15px; width: 100%; }
+            .hero-input-group { width: 100%; border-right: none; border-bottom: 1px solid #eee; padding: 15px 0; justify-content: flex-start; }
+            .hero-cta { width: 100%; border-radius: 12px; margin-top: 15px; height: 45px; }
+        }
+
+        /* =========================================
+           SECCIONES COMUNES
+           ========================================= */
+        .section-padding { padding: 100px 0; }
+        .section-title, .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title span { display: block; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 10px; }
+        .section-title h2, .section-header h2 { font-size: 3rem; margin-bottom: 20px; }
+        .section-header p { font-size: 1.1rem; color: var(--text-light); max-width: 700px; margin: 0 auto; }
+
+        @media (max-width: 768px) {
+            .section-padding { padding: 60px 0; }
+            .section-title, .section-header { margin-bottom: 40px; }
+            .section-title h2, .section-header h2 { font-size: 2rem; }
+        }
+
+        /* SERVICIOS */
+        #servicios { background-color: var(--bg-light); }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        
+        .service-img-wrapper { height: 200px; overflow: hidden; position: relative; flex-shrink: 0; }
+        .service-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .service-card:hover .service-img-wrapper img { transform: scale(1.1); }
+        
+        .service-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .service-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 51, 102, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        .service-card:hover .service-icon-wrapper { background: var(--primary); color: var(--white); }
+
+        .service-content h3 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 700; }
+        .service-content p { font-size: 0.95rem; margin-bottom: 20px; color: var(--text-dark); line-height: 1.6; }
+
+        .service-content ul { padding: 0; margin: 0 0 20px 0; }
+        .service-content ul li {
+            list-style: none; margin-bottom: 10px; font-size: 0.9rem;
+            color: var(--text-light); display: flex; align-items: flex-start;
+        }
+        .service-content ul li i { color: var(--accent); margin-right: 10px; margin-top: 5px; flex-shrink: 0; }
+
+        .service-benefit {
+            margin-top: auto; padding-top: 20px; border-top: 1px solid #eee;
+            font-size: 0.9rem; font-weight: 600; color: var(--primary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .service-benefit i { color: var(--accent); }
+
+        /* =========================================
+           CALCULADORA DE FRIGORÍAS
+           ========================================= */
+        #calculadora { background-color: var(--white); }
+        
+        .calc-wrapper {
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+            max-width: 760px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+        }
+
+        .calc-form-group { margin-bottom: 20px; text-align: left; }
+        
+        .calc-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .calc-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+        }
+
+        .calc-result {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(0, 51, 102, 0.05);
+            border-radius: 8px;
+            border-left: 5px solid var(--accent);
+            display: none;
+        }
+        
+        .calc-result h4 { 
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem; 
+            margin-bottom: 10px; 
+            color: var(--primary); 
+            line-height: 1.5;
+        }
+        
+        .calc-highlight {
+            color: #d32f2f;
+            font-size: 1.6em;
+            font-weight: 800;
+        }
+
+        .calc-result p { font-size: 0.85rem; color: var(--text-light); margin: 0; font-style: italic; }
+        
+        .calc-error {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* =========================================
+           SECCIÓN: RETIRO Y ENTREGA
+           ========================================= */
+        #retiro-taller {
+            position: relative;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&q=80') no-repeat center/cover;
+            color: var(--white);
+            text-align: center;
+        }
+
+        #retiro-taller::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 51, 102, 0.9);
+            z-index: 1;
+        }
+
+        #retiro-taller .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #retiro-taller .section-title span { color: var(--accent); }
+        #retiro-taller .section-title h2 { color: var(--white); }
+
+        #retiro-taller p.mb-4 {
+            color: var(--white);
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+        }
+
+        .retiro-list {
+            list-style: none;
+            padding: 0;
+            margin: 40px auto;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .retiro-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--white);
+        }
+
+        .retiro-list li i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        #retiro-taller p.fw-bold {
+            color: var(--accent) !important;
+            font-size: 1.2rem;
+        }
+
+        /* =========================================
+           SECCIÓN: REDES SOCIALES
+           ========================================= */
+        .redes-coolpower {
+            background-color: var(--bg-light);
+        }
+
+        .redes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .red-item {
+            display: block;
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #eee;
+            text-decoration: none;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        .red-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .red-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        
+        .red-item:hover .red-icon {
+            transform: scale(1.1);
+        }
+
+        .red-icon.insta { color: #E1306C; }
+        .red-icon.tiktok { color: #000000; }
+        .red-icon.facebook { color: #1877F2; }
+        .red-icon.whatsapp { color: #25D366; }
+
+        .red-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .red-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* DIFERENCIALES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .feature-item { text-align: center; padding: 30px 20px; transition: var(--transition); }
+        .feature-item:hover { transform: translateY(-5px); }
+        
+        .feature-icon-box {
+            width: 80px; height: 80px; background: rgba(0, 51, 102, 0.05);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 25px; color: var(--primary); font-size: 2rem; transition: var(--transition);
+        }
+        .feature-item:hover .feature-icon-box { background: var(--accent); color: var(--white); }
+        
+        .feature-text h4 { font-size: 1.25rem; margin-bottom: 15px; font-weight: 700; color: var(--text-dark); }
+        .feature-text p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
+
+        /* =========================================
+           TESTIMONIOS (CARRUSEL INFINITO)
+           ========================================= */
+        #testimonios {
+            background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80') no-repeat center/cover;
+            position: relative; padding: 120px 0; color: var(--white);
+            overflow: hidden; /* Oculta los elementos fuera de la vista */
+        }
+        
+        #testimonios::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 51, 102, 0.9); 
+            z-index: 1; 
+        }
+        
+        #testimonios .container { position: relative; z-index: 2; }
+        #testimonios .section-title h2 { color: var(--white); }
+        
+        .testimonials-grid-wrapper {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            cursor: grab;
+        }
+
+        /* Contenedor del Carrusel (Track) */
+        .testimonials-grid {
+            display: flex;
+            width: calc(320px * 16); /* 8 items originales * 2 para duplicidad * 320px ancho mínimo */
+            animation: testimonialScroll 60s linear infinite; /* 60s para un scroll suave de 8 items */
+            will-change: transform;
+        }
+
+        .testimonials-grid:hover {
+            animation-play-state: paused;
+            cursor: grabbing;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px);
+            padding: 40px; 
+            border-radius: var(--radius); 
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: left; 
+            height: 100%;
+            width: 320px; /* Ancho fijo para el scroll */
+            margin-right: 30px; /* Espacio entre tarjetas */
+            flex-shrink: 0;
+        }
+
+        .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 25px; opacity: 0.9; }
+        .client-meta { display: flex; align-items: center; gap: 15px; }
+        .client-avatar { width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        
+        /* Keyframes para el scroll infinito */
+        @keyframes testimonialScroll {
+            0% { transform: translateX(0); }
+            /* Mueve el ancho de 8 tarjetas (la mitad del track) */
+            100% { transform: translateX(calc(-350px * 8)); } 
+        }
+
+
+        /* CONTACTO & FAQ */
+        .contact-section-wrapper {
+            background: var(--white); border-radius: var(--radius);
+            box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-wrap: wrap;
+        }
+        .contact-map-image {
+            flex: 1; min-width: 300px;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80') center/cover;
+            position: relative;
+            min-height: 300px;
+        }
+        .contact-map-overlay {
+            position: absolute; top:0; left:0; width: 100%; height: 100%;
+            background: rgba(0, 51, 102, 0.85);
+            display: flex; flex-direction: column; justify-content: center; padding: 40px; color: var(--white);
+        }
+        .contact-form-container { flex: 1; min-width: 300px; padding: 50px; }
+        
+        @media (max-width: 768px) {
+            .contact-form-container { padding: 30px 20px; }
+            .contact-map-overlay { padding: 30px 20px; }
+        }
+
+        .form-input {
+            width: 100%; padding: 15px; background: var(--bg-light);
+            border: 1px solid #eee; border-radius: 8px; margin-bottom: 20px;
+            font-family: var(--font-body);
+        }
+        .form-input:focus { outline: none; border-color: var(--primary); }
+        .contact-item { margin-bottom: 25px; display: flex; align-items: flex-start; gap: 15px; }
+        
+        /* Estilos FAQ Accordion */
+        #faq details {
+            background: var(--white); border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px;
+        }
+        #faq summary {
+            padding: 15px 10px; cursor: pointer; font-weight: 600; font-size: 1.1rem;
+            display: flex; justify-content: space-between; align-items: center; list-style: none;
+        }
+        #faq summary::after { content: '+'; font-size: 1.5rem; color: var(--accent); font-weight: 300; }
+        #faq details[open] summary::after { content: '-'; }
+        #faq details[open] summary { color: var(--primary); }
+        #faq .faq-answer { color: var(--text-light); padding: 0 10px 20px 10px; }
+
+        /* SECCIÓN MARCAS (SLIDER INFINITO CSS) */
+        #marcas {
+            background-color: var(--white);
+            overflow: hidden;
+            padding: 80px 0;
+        }
+        
+        .marcas-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .marcas-track {
+            display: flex;
+            width: calc(200px * 18); /* Ancho para 18 ítems de 200px */
+            animation: scroll 30s linear infinite;
+        }
+        
+        .marca-item {
+            width: 200px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+        
+        .marca-item img {
+            max-width: 100%;
+            max-height: 70px;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: var(--transition);
+            object-fit: contain;
+        }
+        
+        .marca-item:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 9)); } /* Mover la mitad del ancho total */
+        }
+
+        /* FOOTER */
+        footer { background: #1A1A1A; color: #aaa; padding: 80px 0 30px; }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+
+        .footer-logo { 
+            color: var(--white); 
+            font-family: var(--font-heading); 
+            font-size: 1.5rem; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-logo span { color: var(--accent); }
+
+        .footer-title { color: var(--white); margin-bottom: 25px; font-size: 1.1rem; font-family: var(--font-heading); }
+        
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #aaa; transition: var(--transition); }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            text-align: center; 
+            font-size: 0.85rem;
+        }
+        
+        .btn-form {
+            width: 100%;
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .btn-form:hover { background: var(--accent); color: white; box-shadow: 0 8px 25px rgba(0, 51, 102, 0.3); }
+    </style>
+</head>
+<body>
+
+    <!-- MENU FLOTANTE BOOTSTRAP -->
+    <nav class="navbar navbar-expand-lg fixed-top mx-3 mt-3 navbar-floating">
+        <div class="container-fluid">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#hero">
+                <img src="logo.jpg" alt="COOLPOWER Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                <i class="fas fa-snowflake logo-fallback" style="display:none;"></i>
+                <span class="brand-text">COOLPOWER<span>refrigeración</span></span>
+            </a>
+            
+            <!-- Toggler para móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Contenido del Menú -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="#hero">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#diferenciales">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">Preguntas</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-nav-cta" href="#contacto">Agendar Visita</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <!-- Carrusel de Fondo -->
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');"></div>
+            <div class="hero-slide" style="background-image: url('https://cdn.pixabay.com/photo/2016/05/09/17-26-background-texture-1382002_640.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('https://us.123rf.com/450wm/avagyanlevon/avagyanlevon2209/avagyanlevon220900008/191118070-tel%C3%B3n-de-fondo-de-panal-azul-y-amarillo.jpg?ver=6');"></div>
+        </div>
+
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-inner">
+                <!-- Logo Grande en el Hero -->
+                <div class="hero-logo-container">
+                    <img src="logo.jpg" alt="COOLPOWER Logo" class="hero-logo">
+                </div>
+                
+                <!-- Título Principal (Nombre de la Empresa) -->
+                <h1 class="brand-headline">COOLPOWER REFRIGERACIÓN</h1>
+                <!-- Nuevo Subtítulo (Slogan) -->
+                <div class="hero-subheadline">Expertos en Climatización en Buenos Aires</div>
+                
+                <div class="hero-search-box">
+                    <div class="hero-input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="hero-text">
+                            <span>Ubicación</span>
+                            <strong>CABA y Alrededores</strong>
+                        </div>
+                    </div>
+                    <div class="hero-input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="hero-text">
+                            <span>Disponibilidad</span>
+                            <strong>Turnos en 24hs</strong>
+                        </div>
+                    </div>
+                    <button class="hero-cta" onclick="window.location.href='#contacto'">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <span>Nuestros Servicios</span>
+                <h2>Soluciones Integrales</h2>
+            </div>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80" alt="Instalación Aire">
+                        <div class="service-price-tag">Garantizado</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon-wrapper"><i class="fas fa-tools service-icon"></i></div>
+                        <h3>Instalación de Aires Split</h3>
+                        <p>Instalación profesional de equipos nuevos o usados, respetando las normativas.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Colocación prolija de unidades</li>
+                            <li><i class="fas fa-check-circle"></i> Vacío de cañerías</li>
+                            <li><i class="fas fa-check-circle"></i> Materiales de 1ra calidad</li>
+                        </ul>
+                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Maximiza la vida útil.</div>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581094794329-cd1096d7a43f?auto=format&fit=crop&q=80" alt="Reparación">
+                        <div class="service-price-tag">Urgencias</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon-wrapper"><i class="fas fa-snowflake service-icon"></i></div>
+                        <h3>Reparación y Mantenimiento</h3>
+                        <p>Diagnóstico preciso y solución rápida para todas las marcas de Split.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Carga de gas refrigerante</li>
+                            <li><i class="fas fa-check-circle"></i> Limpieza profunda</li>
+                            <li><i class="fas fa-check-circle"></i> Reparación de placas</li>
+                        </ul>
+                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Aire más puro y eficiente.</div>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1626806775351-538af710a40b?auto=format&fit=crop&q=80" alt="Lavarropas">
+                        <div class="service-price-tag">A Domicilio</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon-wrapper"><i class="fas fa-soap service-icon"></i></div>
+                        <h3>Reparación de Lavarropas</h3>
+                        <p>Servicio técnico para lavarropas automáticos. Solucionamos fallas en el día.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Cambio de bombas</li>
+                            <li><i class="fas fa-check-circle"></i> Reparación de plaquetas</li>
+                            <li><i class="fas fa-check-circle"></i> Presupuesto a domicilio</li>
+                        </ul>
+                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Ahorrá reparando tu equipo.</div>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&q=80" alt="Electricidad">
+                        <div class="service-price-tag">Matriculado</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon-wrapper"><i class="fas fa-bolt service-icon"></i></div>
+                        <h3>Electricidad Domiciliaria</h3>
+                        <p>Soluciones eléctricas seguras. Reparaciones, instalaciones y mejoras.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Cambio de tomas y teclas</li>
+                            <li><i class="fas fa-check-circle"></i> Detección de cortos</li>
+                            <li><i class="fas fa-check-circle"></i> Instalación de luminarias</li>
+                        </ul>
+                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Seguridad eléctrica garantizada.</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULADORA DE FRIGORÍAS -->
+    <section id="calculadora" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <span>Herramienta Útil</span>
+                <!-- Título Actualizado -->
+                <h2>Calculá las frigorías para ahorrar en la compra de tu Aire</h2>
+                <p>Solo tenés que ingresar las medidas, el tipo de vivienda y la cantidad de personas.</p>
+            </div>
+            
+            <div class="calc-wrapper">
+                <div class="row">
+                    <div class="col-md-4 calc-form-group">
+                        <label for="calc-ancho" class="calc-label">Ancho (m)</label>
+                        <input type="number" id="calc-ancho" class="calc-input" placeholder="Ej: 3.5" step="0.1" min="0">
+                    </div>
+                    <div class="col-md-4 calc-form-group">
+                        <label for="calc-largo" class="calc-label">Largo (m)</label>
+                        <input type="number" id="calc-largo" class="calc-input" placeholder="Ej: 4.0" step="0.1" min="0">
+                    </div>
+                    <div class="col-md-4 calc-form-group">
+                        <label for="calc-alto" class="calc-label">Altura (m)</label>
+                        <input type="number" id="calc-alto" class="calc-input" placeholder="Ej: 2.5" value="2.5" step="0.1" min="0">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 calc-form-group">
+                        <label for="calc-tipo" class="calc-label">Tipo de vivienda</label>
+                        <select id="calc-tipo" class="calc-input" style="cursor: pointer;">
+                            <option value="1.0">Departamento interno o poco sol</option>
+                            <option value="1.1">Departamento al frente con sol</option>
+                            <option value="1.2">Último piso / techo de chapa</option>
+                            <option value="1.05">Casa en planta baja</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 calc-form-group">
+                        <label for="calc-personas" class="calc-label">Personas habituales</label>
+                        <input type="number" id="calc-personas" class="calc-input" placeholder="Ej: 2" min="1" step="1">
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn-form" onclick="calcularFrigorias()">Calcular frigorías</button>
+                    <div id="calc-error" class="calc-error">Por favor, completá todos los campos con valores mayores a cero.</div>
+                </div>
+
+                <div id="calc-result" class="calc-result">
+                    <h4 id="result-text"></h4>
+                    <p>El resultado es orientativo. Si tenés dudas, podés consultarnos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: RETIRO Y ENTREGA -->
+    <section id="retiro-taller" class="section-padding">
+        <div class="container">
+            <div class="section-title text-center mb-5" style="margin-bottom: 30px;">
+                <span>Servicio Premium</span>
+                <h2 style="font-size: 2.5rem;">¿No querés que reparemos en tu casa?</h2>
+            </div>
+            
+            <p class="mb-4" style="font-size: 1.1rem; color: var(--white);">Si por falta de tiempo, visitas en casa o por comodidad preferís que no hagamos la reparación en tu domicilio, no hay problema.</p>
+            <p class="mb-4" style="font-size: 1.1rem; color: var(--white);">Pasamos por tu hogar, retiramos el lavarropas, lo reparamos en nuestro taller y luego te lo entregamos funcionando.</p>
+            
+            <ul class="retiro-list">
+                <li><i class="fas fa-truck"></i> Retiro y entrega a domicilio</li>
+                <li><i class="fas fa-tools"></i> Reparación en taller equipado</li>
+                <li><i class="fas fa-clock"></i> Coordinamos día y horario</li>
+            </ul>
+            
+            <p class="mt-4 fw-bold">Vos solo tenés que avisarnos, del resto nos encargamos nosotros.</p>
+            
+            <a href="#contacto" class="btn btn-nav-cta mt-4" style="display: inline-block;">Solicitar Retiro</a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: REDES SOCIALES -->
+    <section id="redes-sociales" class="section-padding redes-coolpower">
+        <div class="container">
+            <div class="section-title">
+                <span>Comunidad</span>
+                <h2>COOLPOWER en redes sociales</h2>
+                <p>Mantenete informado sobre nuestros servicios, novedades y recomendaciones de mantenimiento a través de nuestros canales oficiales.</p>
+            </div>
+
+            <div class="text-center mb-5" style="max-width: 800px; margin: 0 auto;">
+                <p>Podés seguirnos y contactarnos por la red que te resulte más cómoda. Encontrarás información actualizada, fotos de nuestros trabajos realizados y vías de comunicación directa con nuestro equipo.</p>
+            </div>
+
+            <div class="redes-grid">
+                <a href="#" target="_blank" class="red-item">
+                    <i class="fa-brands fa-instagram red-icon insta"></i>
+                    <h4>Instagram</h4>
+                    <p>Explorá nuestra galería de proyectos y consejos visuales.</p>
+                </a>
+                <a href="#" target="_blank" class="red-item">
+                    <i class="fa-brands fa-tiktok red-icon tiktok"></i>
+                    <h4>TikTok</h4>
+                    <p>Descubrí tips rápidos y tutoriales del detrás de escena.</p>
+                </a>
+                <a href="#" target="_blank" class="red-item">
+                    <i class="fa-brands fa-facebook-f red-icon facebook"></i>
+                    <h4>Facebook</h4>
+                    <p>Unite a nuestra comunidad para recibir novedades y ver reseñas.</p>
+                </a>
+                <a href="https://wa.me/541155555555" target="_blank" class="red-item">
+                    <i class="fa-brands fa-whatsapp red-icon whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>Comunicación directa e inmediata para consultas.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIALES -->
+    <section id="diferenciales" class="section-padding" style="background-color: var(--white);">
+        <div class="container">
+            <div class="section-title">
+                <span>Por qué elegir a COOLPOWERrefrigeración</span>
+                <h2>Nuestra Propuesta</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fas fa-user-tie"></i></div>
+                    <div class="feature-text">
+                        <h4>Técnicos Matriculados</h4>
+                        <p>Personal capacitado y con amplia experiencia en el rubro.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="feature-text">
+                        <h4>Rapidez en la Atención</h4>
+                        <p>Priorizamos urgencias. Turnos en 24/48hs según disponibilidad.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div class="feature-text">
+                        <h4>Presupuestos Claros</h4>
+                        <p>Precios transparentes. Sabés lo que pagás antes de empezar.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fas fa-handshake"></i></div>
+                    <div class="feature-text">
+                        <h4>Garantía Real</h4>
+                        <p>Todas nuestras reparaciones e instalaciones cuentan con garantía escrita.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios">
+        <div class="container">
+            <div class="section-title">
+                <span>Opiniones</span>
+                <h2>Clientes Felices</h2>
+            </div>
+            <!-- Contenedor del Carrusel de Testimonios -->
+            <div class="testimonials-grid-wrapper">
+                <div class="testimonials-grid">
+                    <!-- 1. Opinión Existente -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Excelente servicio. Muy similar a contratar un servicio 5 estrellas. Puntuales y prolijos."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">MG</div>
+                            <div class="client-info"><h5>María González</h5><span class="client-location">Palermo</span></div>
+                        </div>
+                    </div>
+                    <!-- 2. Opinión Existente -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Me salvaron en pleno verano. La reparación del aire fue rápida y el precio transparente."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">JP</div>
+                            <div class="client-info"><h5>Juan Pérez</h5><span class="client-location">Belgrano</span></div>
+                        </div>
+                    </div>
+                    <!-- 3. Opinión Existente -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Profesionalismo total. Arreglaron el lavarropas en una sola visita. Muy recomendables."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">CR</div>
+                            <div class="client-info"><h5>Carla Rodríguez</h5><span class="client-location">Caballito</span></div>
+                        </div>
+                    </div>
+                    <!-- 4. Nueva Opinión (Atención inmediata) -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"La atención fue inmediata, los contacté un domingo por un corto eléctrico y respondieron al toque. Solucionaron el problema rápido y con mucha seguridad."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">LV</div>
+                            <div class="client-info"><h5>Laura V.</h5><span class="client-location">Villa Devoto</span></div>
+                        </div>
+                    </div>
+                    <!-- 5. Nueva Opinión (GBA) -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Necesitaba la instalación de dos equipos en San Isidro. El equipo de COOLPOWER vino hasta acá, muy prolijos y con todos los materiales necesarios. Quedó impecable."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">RM</div>
+                            <div class="client-info"><h5>Roberto M.</h5><span class="client-location">San Isidro</span></div>
+                        </div>
+                    </div>
+                    <!-- 6. Nueva Opinión (Mantenimiento) -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Contraté el mantenimiento preventivo para mis dos aires. La diferencia es notable, enfrió mucho mejor y sin ese olor feo. Gracias por el excelente servicio."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">AS</div>
+                            <div class="client-info"><h5>Ana S.</h5><span class="client-location">Colegiales</span></div>
+                        </div>
+                    </div>
+                    <!-- 7. Nueva Opinión (Empresa) -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Servicio de electricidad confiable para nuestro local. Cumplen con la facturación y los horarios. Muy profesionales y serios en el Microcentro."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">EC</div>
+                            <div class="client-info"><h5>Estudio C.</h5><span class="client-location">Microcentro</span></div>
+                        </div>
+                    </div>
+                    <!-- 8. Nueva Opinión (Precio) -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Me habían dado un presupuesto altísimo en otro lugar. COOLPOWER me dio un precio justo y sin vueltas. Lo repararon en el momento sin sorpresas. Totalmente transparentes."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">MG</div>
+                            <div class="client-info"><h5>Martín G.</h5><span class="client-location">Flores</span></div>
+                        </div>
+                    </div>
+
+                    <!-- DUPLICADOS PARA SCROLL INFINITO -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Excelente servicio. Muy similar a contratar un servicio 5 estrellas. Puntuales y prolijos."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">MG</div>
+                            <div class="client-info"><h5>María González</h5><span class="client-location">Palermo</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Me salvaron en pleno verano. La reparación del aire fue rápida y el precio transparente."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">JP</div>
+                            <div class="client-info"><h5>Juan Pérez</h5><span class="client-location">Belgrano</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Profesionalismo total. Arreglaron el lavarropas en una sola visita. Muy recomendables."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">CR</div>
+                            <div class="client-info"><h5>Carla Rodríguez</h5><span class="client-location">Caballito</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"La atención fue inmediata, los contacté un domingo por un corto eléctrico y respondieron al toque. Solucionaron el problema rápido y con mucha seguridad."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">LV</div>
+                            <div class="client-info"><h5>Laura V.</h5><span class="client-location">Villa Devoto</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Necesitaba la instalación de dos equipos en San Isidro. El equipo de COOLPOWER vino hasta acá, muy prolijos y con todos los materiales necesarios. Quedó impecable."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">RM</div>
+                            <div class="client-info"><h5>Roberto M.</h5><span class="client-location">San Isidro</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Contraté el mantenimiento preventivo para mis dos aires. La diferencia es notable, enfrió mucho mejor y sin ese olor feo. Gracias por el excelente servicio."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">AS</div>
+                            <div class="client-info"><h5>Ana S.</h5><span class="client-location">Colegiales</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Servicio de electricidad confiable para nuestro local. Cumplen con la facturación y los horarios. Muy profesionales y serios en el Microcentro."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">EC</div>
+                            <div class="client-info"><h5>Estudio C.</h5><span class="client-location">Microcentro</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Me habían dado un presupuesto altísimo en otro lugar. COOLPOWER me dio un precio justo y sin vueltas. Lo repararon en el momento sin sorpresas. Totalmente transparentes."</p>
+                        <div class="client-meta">
+                            <div class="client-avatar">MG</div>
+                            <div class="client-info"><h5>Martín G.</h5><span class="client-location">Flores</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO & FAQ -->
+    <section id="contacto" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <span>Contacto</span>
+                <h2>Hablemos</h2>
+            </div>
+            
+            <div class="contact-section-wrapper">
+                <div class="contact-map-image">
+                    <div class="contact-map-overlay">
+                        <h3>Información</h3>
+                        <div class="contact-item"><i class="fab fa-whatsapp"></i><div><h5>WhatsApp</h5><p>11 5555-5555</p></div></div>
+                        <div class="contact-item"><i class="far fa-envelope"></i><div><h5>Email</h5><p>info@coolpowerrefrigeracion.com.ar</p></div></div>
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h5>Zona</h5><p>CABA y Alrededores</p></div></div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form action="#" method="POST">
+                        <input type="text" class="form-input" placeholder="Nombre Completo" required>
+                        <input type="tel" class="form-input" placeholder="Teléfono" required>
+                        <select class="form-input">
+                            <option>Tipo de Servicio</option>
+                            <option>Reparación Aire</option>
+                            <option>Instalación Aire</option>
+                            <option>Lavarropas</option>
+                            <option>Electricidad</option>
+                        </select>
+                        <textarea rows="4" class="form-input" placeholder="Mensaje"></textarea>
+                        <button type="submit" class="btn-form">Enviar Consulta</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div id="faq" class="faq-container" style="margin-top: 80px;">
+                <h3 style="text-align:center; margin-bottom:30px; font-family: var(--font-heading); color: var(--primary);">Preguntas Frecuentes</h3>
+                
+                <details open>
+                    <summary>¿Qué marcas reparan?</summary>
+                    <div class="faq-answer">Trabajamos con todas las marcas líderes del mercado: Surrey, BGH, LG, Samsung, Carrier, Electra, Drean, Whirlpool, Electrolux, entre otras.</div>
+                </details>
+                <details>
+                    <summary>¿Cuál es el costo de la visita?</summary>
+                    <div class="faq-answer">La visita técnica tiene un costo fijo que cubre el traslado y el diagnóstico profesional. Si aprueba el presupuesto, se bonifica total o parcialmente.</div>
+                </details>
+                <details>
+                    <summary>¿Qué incluye una instalación básica?</summary>
+                    <div class="faq-answer">Fijación de unidades, perforación de pared (ladrillo), hasta 3 metros de cañería, aislación, cableado y vacío del sistema.</div>
+                </details>
+                <details>
+                    <summary>¿Ofrecen garantía?</summary>
+                    <div class="faq-answer">Sí, todos nuestros trabajos cuentan con una garantía escrita de 6 meses sobre la mano de obra.</div>
+                </details>
+                <details>
+                    <summary>¿Cuáles son los medios de pago?</summary>
+                    <div class="faq-answer">Aceptamos efectivo, transferencias bancarias, Mercado Pago y tarjetas de crédito/débito.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: MARCAS (SLIDER INFINITO CSS) -->
+    <section id="marcas" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <span>Confianza Total</span>
+                <h2>Trabajamos todas las Marcas</h2>
+                <p>Instalación y reparación de Aire Acondicionado Split, Heladeras y Lavarropas</p>
+            </div>
+            <div class="marcas-container">
+                <div class="marcas-track">
+                    <!-- Placeholder Brands -->
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Philco" alt="Philco"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Samsung" alt="Samsung"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Sanyo" alt="Sanyo"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=TopHouse" alt="TopHouse"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Bosch" alt="Bosch"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Whirlpool" alt="Whirlpool"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=BGH" alt="BGH"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Candy" alt="Candy"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Carrier" alt="Carrier"></div>
+                    <!-- Duplicate -->
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Electra" alt="Electra"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Electrolux" alt="Electrolux"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=GE" alt="GE"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Midea" alt="Midea"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Longvie" alt="Longvie"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Patrick" alt="Patrick"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Coventry" alt="Coventry"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Firstline" alt="Firstline"></div>
+                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Eslabon" alt="Eslabón"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#hero" class="logo footer-logo" style="font-size: 1.4rem;">
+                        <img src="logo.jpg" alt="COOLPOWER Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                        <i class="fas fa-snowflake logo-fallback" style="display:none;"></i>
+                        <span class="brand-text">COOLPOWER<span>refrigeración</span></span>
+                    </a>
+                    <p>Somos especialistas en climatización y electrodomésticos de línea blanca. Comprometidos con la calidad en CABA y alrededores.</p>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-title">Navegación Rápida</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#faq">Preguntas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title">Contacto Directo</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wa.me/541155555555"><i class="fab fa-whatsapp" style="color:#25D366; font-size: 1.1rem;"></i> 11 5555-5555</a></li>
+                        <li><a href="mailto:info@coolpowerrefrigeracion.com.ar"><i class="far fa-envelope" style="font-size: 1rem;"></i> info@coolpowerrefrigeracion.com.ar</a></li>
+                        <li><span><i class="far fa-clock" style="font-size: 1rem;"></i> Lun-Sáb: 8 a 19hs</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 COOLPOWERrefrigeración. Todos los derechos reservados. | Diseño web optimizado para SEO local.
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOOTSTRAP 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Lógica del Carrusel de Imágenes de Fondo
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        if (slides.length > 0) {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 3000);
+        }
+
+        // Lógica de la Calculadora de Frigorías
+        function calcularFrigorias() {
+            // 1. Obtener valores y referencias
+            const ancho = parseFloat(document.getElementById('calc-ancho').value);
+            const largo = parseFloat(document.getElementById('calc-largo').value);
+            const alto = parseFloat(document.getElementById('calc-alto').value);
+            const factorTipo = parseFloat(document.getElementById('calc-tipo').value);
+            const personas = parseInt(document.getElementById('calc-personas').value);
+            
+            const errorMsg = document.getElementById('calc-error');
+            const resultBox = document.getElementById('calc-result');
+            const resultText = document.getElementById('result-text');
+
+            // 2. Validaciones
+            if (isNaN(ancho) || ancho <= 0 || 
+                isNaN(largo) || largo <= 0 || 
+                isNaN(alto) || alto <= 0 || 
+                isNaN(personas) || personas < 0) {
+                
+                errorMsg.style.display = 'block';
+                resultBox.style.display = 'none';
+                return;
+            }
+
+            errorMsg.style.display = 'none';
+
+            // 3. Lógica de Cálculo
+            const volumen = ancho * largo * alto;
+            let frigorias = volumen * 45;
+            frigorias = frigorias * factorTipo;
+
+            // Ajuste por personas (100 frigorías por persona extra a partir de la 3ra)
+            if (personas > 2) {
+                const personasExtra = personas - 2;
+                frigorias += (personasExtra * 100);
+            }
+
+            const frigoriasFinales = Math.round(frigorias);
+
+            // 4. Mostrar Resultado
+            resultText.innerHTML = `Para este ambiente se recomienda un equipo de aproximadamente <span class="calc-highlight">${frigoriasFinales}</span> frigorías.`;
+            resultBox.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
