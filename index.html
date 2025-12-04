@@ -125,9 +125,10 @@
 
         @media (max-width: 991px) {
             .navbar-floating {
-                border-radius: 15px;
+                border-radius: 0; /* Bordes rectos para ocupar todo el ancho */
                 padding: 0.8rem 1rem;
-                margin: 10px !important;
+                margin: 0 !important; /* ELIMINA MARGENES mx-3 mt-3 */
+                width: 100%; /* Ocupa el ancho completo */
             }
             .navbar-collapse {
                 margin-top: 15px;
@@ -188,7 +189,7 @@
         .hero-overlay {
             /* MANTENEMOS ESTA CAPA COMO EL FONDO PRINCIPAL AZUL OSCURO */
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 20, 40, 0.8); /* Opacidad mayor para mejor legibilidad */
+            background: rgba(0, 20, 80, 0.4); /* Opacidad mayor para mejor legibilidad */
             z-index: 1;
         }
 
@@ -325,11 +326,56 @@
         /* SERVICIOS */
         #servicios { background-color: var(--bg-light); }
         
+        /* Contenedor de grilla en escritorio */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 30px;
         }
+        
+        /* OCULTAR TARJETAS DUPLICADAS EN ESCRITORIO */
+        @media (min-width: 769px) {
+            .service-card:nth-child(n+5) { display: none; }
+        }
+        
+        /* Móvil: Carrusel infinito */
+        @media (max-width: 768px) {
+            /* Envoltura crítica para cortar el desbordamiento */
+            .services-track-wrapper {
+                width: 100%;
+                overflow: hidden; /* Esto evita el scroll horizontal en el body */
+                position: relative;
+            }
+
+            .services-grid {
+                display: flex;
+                width: calc(300px * 8 + 160px); /* Ancho total del track animado (8 tarjetas de 300px + gaps) */
+                gap: 20px;
+                animation: servicesScroll 30s linear infinite;
+                padding: 10px 0;
+                grid-template-columns: none;
+                /* Reset padding container */
+                margin-left: 0; margin-right: 0;
+                /* Padding-left para evitar que la primera se pegue al borde al inicio */
+                padding-left: 20px;
+            }
+            
+            #servicios .container { padding-left: 0; padding-right: 0; }
+
+            .services-grid:hover { animation-play-state: paused; }
+
+            .service-card {
+                width: 300px; /* Ancho fijo en móvil */
+                flex-shrink: 0; /* No encoger */
+                display: flex !important; /* Mostrar todas las tarjetas (incluidas las duplicadas) */
+            }
+        }
+
+        @keyframes servicesScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1280px); } /* (300+20)*4 */
+        }
+
 
         .service-card {
             background: var(--white);
@@ -385,351 +431,152 @@
            CALCULADORA DE FRIGORÍAS
            ========================================= */
         #calculadora { background-color: var(--white); }
-        
-        .calc-wrapper {
-            background: var(--bg-light);
-            border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: var(--shadow-card);
-            max-width: 760px;
-            margin: 0 auto;
-            border: 1px solid #eee;
-        }
-
+        .calc-wrapper { background: var(--bg-light); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-card); max-width: 760px; margin: 0 auto; border: 1px solid #eee; }
         .calc-form-group { margin-bottom: 20px; text-align: left; }
-        
-        .calc-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        .calc-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        .calc-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
-        }
-
-        .calc-result {
-            margin-top: 30px;
-            padding: 25px;
-            background: rgba(0, 51, 102, 0.05);
-            border-radius: 8px;
-            border-left: 5px solid var(--accent);
-            display: none;
-        }
-        
-        .calc-result h4 { 
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.1rem; 
-            margin-bottom: 10px; 
-            color: var(--primary); 
-            line-height: 1.5;
-        }
-        
-        .calc-highlight {
-            color: #d32f2f;
-            font-size: 1.6em;
-            font-weight: 800;
-        }
-
+        .calc-label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark); font-size: 0.9rem; }
+        .calc-input { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body); font-size: 1rem; transition: var(--transition); }
+        .calc-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1); }
+        .calc-result { margin-top: 30px; padding: 25px; background: rgba(0, 51, 102, 0.05); border-radius: 8px; border-left: 5px solid var(--accent); display: none; }
+        .calc-result h4 { font-family: 'Courier New', Courier, monospace; font-size: 1.1rem; margin-bottom: 10px; color: var(--primary); line-height: 1.5; }
+        .calc-highlight { color: #d32f2f; font-size: 1.6em; font-weight: 800; }
         .calc-result p { font-size: 0.85rem; color: var(--text-light); margin: 0; font-style: italic; }
-        
-        .calc-error {
-            color: #d32f2f;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: none;
-        }
+        .calc-error { color: #d32f2f; font-size: 0.9rem; margin-top: 10px; display: none; }
 
-        /* =========================================
-           SECCIÓN: RETIRO Y ENTREGA
-           ========================================= */
-        #retiro-taller {
-            position: relative;
-            overflow: hidden;
-            background: url('https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&q=80') no-repeat center/cover;
-            color: var(--white);
-            text-align: center;
-        }
-
-        #retiro-taller::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 51, 102, 0.9);
-            z-index: 1;
-        }
-
-        #retiro-taller .container {
-            position: relative;
-            z-index: 2;
-        }
-
+        /* SECCIÓN: RETIRO Y ENTREGA */
+        #retiro-taller { position: relative; overflow: hidden; background: url('./image/retiro-domicilio.jpeg') no-repeat center/cover; color: var(--white); text-align: center; }
+        #retiro-taller::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 51, 102, 0.9); z-index: 1; }
+        #retiro-taller .container { position: relative; z-index: 2; }
         #retiro-taller .section-title span { color: var(--accent); }
         #retiro-taller .section-title h2 { color: var(--white); }
+        #retiro-taller p.mb-4 { color: var(--white); opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 1.1rem; }
+        .retiro-list { list-style: none; padding: 0; margin: 40px auto; max-width: 500px; text-align: left; }
+        .retiro-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 1.1rem; color: var(--white); }
+        .retiro-list li i { color: var(--accent); font-size: 1.2rem; background: rgba(255, 255, 255, 0.1); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+        #retiro-taller p.fw-bold { color: var(--accent) !important; font-size: 1.2rem; }
 
-        #retiro-taller p.mb-4 {
-            color: var(--white);
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.1rem;
+        /* Botón "Solicitar Retiro" con Hover Naranja */
+        .btn-retiro {
+            background: linear-gradient(45deg, var(--primary), #00509E);
+            color: var(--white) !important;
+            border-radius: 50px;
+            padding: 12px 35px;
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
+            transition: all 0.4s ease;
+            white-space: nowrap;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline-block;
         }
 
-        .retiro-list {
-            list-style: none;
-            padding: 0;
-            margin: 40px auto;
-            max-width: 500px;
-            text-align: left;
+        .btn-retiro:hover {
+            background: var(--accent) !important; /* Naranja en hover */
+            color: white !important;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px);
         }
 
-        .retiro-list li {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: var(--white);
+        /* SECCIÓN: REDES SOCIALES (CARRUSEL MÓVIL) */
+        .redes-coolpower { background-color: var(--bg-light); }
+        
+        /* Escritorio: Grid normal */
+        .redes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        
+        /* Ocultar duplicados en escritorio */
+        @media (min-width: 769px) {
+            .red-item:nth-child(n+5) { display: none; }
         }
 
-        .retiro-list li i {
-            color: var(--accent);
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            flex-shrink: 0;
+        /* Móvil: Carrusel infinito */
+        @media (max-width: 768px) {
+            .redes-track-wrapper {
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .redes-grid {
+                display: flex;
+                grid-template-columns: none; /* Override grid */
+                /* Ancho: 280px card + 30px gap = 310px * 8 items = 2480px */
+                width: calc(310px * 8); 
+                gap: 30px;
+                animation: redesScroll 30s linear infinite;
+                padding: 10px 0;
+                /* Add Left Padding for initial state */
+                padding-left: 20px;
+            }
+            
+            .redes-grid:hover { animation-play-state: paused; }
+            
+            .red-item {
+                width: 280px;
+                flex-shrink: 0;
+                display: block !important; /* Forzar visualización de duplicados */
+            }
+            
+            /* Ajustar container padding para que no corte la sombra */
+            .redes-coolpower .container { padding-left: 0; padding-right: 0; }
         }
         
-        #retiro-taller p.fw-bold {
-            color: var(--accent) !important;
-            font-size: 1.2rem;
-        }
-
-        /* =========================================
-           SECCIÓN: REDES SOCIALES
-           ========================================= */
-        .redes-coolpower {
-            background-color: var(--bg-light);
-        }
-
-        .redes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        @keyframes redesScroll {
+            0% { transform: translateX(0); }
+            /* Desplazamiento de 4 items: (280 + 30) * 4 = 1240px */
+            100% { transform: translateX(-1240px); }
         }
 
         .red-item {
-            display: block;
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-card);
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid #eee;
-            text-decoration: none;
-            color: var(--text-dark);
-            cursor: pointer;
+            display: block; background: var(--white); padding: 40px 30px; border-radius: var(--radius); box-shadow: var(--shadow-card); text-align: center; transition: var(--transition); border: 1px solid #eee; text-decoration: none; color: var(--text-dark); cursor: pointer;
         }
-
-        .red-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-
-        .red-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            transition: var(--transition);
-        }
-        
-        .red-item:hover .red-icon {
-            transform: scale(1.1);
-        }
-
-        .red-icon.insta { color: #E1306C; }
-        .red-icon.tiktok { color: #000000; }
-        .red-icon.facebook { color: #1877F2; }
-        .red-icon.whatsapp { color: #25D366; }
-
-        .red-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .red-item p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 0;
-            line-height: 1.6;
-        }
+        .red-item:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+        .red-icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; transition: var(--transition); }
+        .red-item:hover .red-icon { transform: scale(2.5); transform-origin: center center; }
+        .red-icon.insta { color: #E1306C; } .red-icon.tiktok { color: #000000; } .red-icon.facebook { color: #1877F2; } .red-icon.whatsapp { color: #25D366; }
+        .red-item h4 { font-size: 1.3rem; margin-bottom: 10px; font-weight: 700; color: var(--text-dark); }
+        .red-item p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 0; line-height: 1.6; }
 
         /* DIFERENCIALES */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
         .feature-item { text-align: center; padding: 30px 20px; transition: var(--transition); }
         .feature-item:hover { transform: translateY(-5px); }
-        
-        .feature-icon-box {
-            width: 80px; height: 80px; background: rgba(0, 51, 102, 0.05);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 25px; color: var(--primary); font-size: 2rem; transition: var(--transition);
-        }
+        .feature-icon-box { width: 80px; height: 80px; background: rgba(0, 51, 102, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: var(--primary); font-size: 2rem; transition: var(--transition); }
         .feature-item:hover .feature-icon-box { background: var(--accent); color: var(--white); }
-        
         .feature-text h4 { font-size: 1.25rem; margin-bottom: 15px; font-weight: 700; color: var(--text-dark); }
         .feature-text p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
 
-        /* =========================================
-           TESTIMONIOS (CARRUSEL INFINITO)
-           ========================================= */
-        #testimonios {
-            background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80') no-repeat center/cover;
-            position: relative; padding: 120px 0; color: var(--white);
-            overflow: hidden; /* Oculta los elementos fuera de la vista */
-        }
-        
-        #testimonios::before { 
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0, 51, 102, 0.9); 
-            z-index: 1; 
-        }
-        
+        /* TESTIMONIOS (CARRUSEL INFINITO) */
+        #testimonios { background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80') no-repeat center/cover; position: relative; padding: 120px 0; color: var(--white); overflow: hidden; }
+        #testimonios::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 51, 102, 0.9); z-index: 1; }
         #testimonios .container { position: relative; z-index: 2; }
         #testimonios .section-title h2 { color: var(--white); }
-        
-        .testimonials-grid-wrapper {
-            width: 100%;
-            overflow: hidden;
-            padding: 20px 0;
-            cursor: grab;
-        }
-
-        /* Contenedor del Carrusel (Track) */
-        .testimonials-grid {
-            display: flex;
-            width: calc(320px * 16); /* 8 items originales * 2 para duplicidad * 320px ancho mínimo */
-            animation: testimonialScroll 60s linear infinite; /* 60s para un scroll suave de 8 items */
-            will-change: transform;
-        }
-
-        .testimonials-grid:hover {
-            animation-play-state: paused;
-            cursor: grabbing;
-        }
-
-        .testimonial-card {
-            background: rgba(255,255,255,0.1); 
-            backdrop-filter: blur(10px);
-            padding: 40px; 
-            border-radius: var(--radius); 
-            border: 1px solid rgba(255,255,255,0.2);
-            text-align: left; 
-            height: 100%;
-            width: 320px; /* Ancho fijo para el scroll */
-            margin-right: 30px; /* Espacio entre tarjetas */
-            flex-shrink: 0;
-        }
-
+        .testimonials-grid-wrapper { width: 100%; overflow: hidden; padding: 20px 0; cursor: grab; }
+        .testimonials-grid { display: flex; width: calc(320px * 16); animation: testimonialScroll 60s linear infinite; will-change: transform; }
+        .testimonials-grid:hover { animation-play-state: paused; cursor: grabbing; }
+        .testimonial-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.2); text-align: left; height: 100%; width: 320px; margin-right: 30px; flex-shrink: 0; }
         .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 25px; opacity: 0.9; }
         .client-meta { display: flex; align-items: center; gap: 15px; }
         .client-avatar { width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
-        
-        /* Keyframes para el scroll infinito */
-        @keyframes testimonialScroll {
-            0% { transform: translateX(0); }
-            /* Mueve el ancho de 8 tarjetas (la mitad del track) */
-            100% { transform: translateX(calc(-350px * 8)); } 
-        }
+        @keyframes testimonialScroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 8)); } }
 
-
-        /* CONTACTO & FAQ */
-        .contact-section-wrapper {
-            background: var(--white); border-radius: var(--radius);
-            box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-wrap: wrap;
-        }
-        .contact-map-image {
-            flex: 1; min-width: 300px;
-            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80') center/cover;
-            position: relative;
-            min-height: 300px;
-        }
-        .contact-map-overlay {
-            position: absolute; top:0; left:0; width: 100%; height: 100%;
-            background: rgba(0, 51, 102, 0.85);
-            display: flex; flex-direction: column; justify-content: center; padding: 40px; color: var(--white);
-        }
-        .contact-form-container { flex: 1; min-width: 300px; padding: 50px; }
-        
-        @media (max-width: 768px) {
-            .contact-form-container { padding: 30px 20px; }
-            .contact-map-overlay { padding: 30px 20px; }
-        }
-
-        .form-input {
-            width: 100%; padding: 15px; background: var(--bg-light);
-            border: 1px solid #eee; border-radius: 8px; margin-bottom: 20px;
-            font-family: var(--font-body);
-        }
-        .form-input:focus { outline: none; border-color: var(--primary); }
-        .contact-item { margin-bottom: 25px; display: flex; align-items: flex-start; gap: 15px; }
-        
-        /* Estilos FAQ Accordion */
-        #faq details {
-            background: var(--white); border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px;
-        }
-        #faq summary {
-            padding: 15px 10px; cursor: pointer; font-weight: 600; font-size: 1.1rem;
-            display: flex; justify-content: space-between; align-items: center; list-style: none;
-        }
-        #faq summary::after { content: '+'; font-size: 1.5rem; color: var(--accent); font-weight: 300; }
-        #faq details[open] summary::after { content: '-'; }
-        #faq details[open] summary { color: var(--primary); }
-        #faq .faq-answer { color: var(--text-light); padding: 0 10px 20px 10px; }
-
-        /* SECCIÓN MARCAS (SLIDER INFINITO CSS) */
+        /* SECCIÓN MARCAS (SLIDER INFINITO CSS - CORRECCIÓN) */
         #marcas {
             background-color: var(--white);
             overflow: hidden;
             padding: 80px 0;
         }
         
+        /* Contenedor que enmascara */
         .marcas-container {
             position: relative;
             width: 100%;
-            overflow: hidden;
+            overflow: hidden; /* CRUCIAL PARA EVITAR SCROLL */
         }
         
         .marcas-track {
             display: flex;
-            width: calc(200px * 18); /* Ancho para 18 ítems de 200px */
-            animation: scroll 30s linear infinite;
+            /* 36 ítems * 200px = 7200px total width (Triple copia para seguridad en monitores anchos) */
+            width: calc(200px * 36);
+            animation: scroll 40s linear infinite;
         }
         
         .marca-item {
@@ -759,12 +606,51 @@
         
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-200px * 9)); } /* Mover la mitad del ancho total */
+            /* Desplazamiento de los 18 ítems originales (18 * 200px = 3600px) */
+            100% { transform: translateX(-3600px); } 
         }
 
+        /* CONTACTO & FAQ */
+        .contact-section-wrapper { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-wrap: wrap; }
+        .contact-map-image { flex: 1; min-width: 300px; background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80') center/cover; position: relative; min-height: 300px; }
+        .contact-map-overlay { position: absolute; top:0; left:0; width: 100%; height: 100%; background: rgba(0, 51, 102, 0.85); display: flex; flex-direction: column; justify-content: center; padding: 40px; color: var(--white); }
+        .contact-form-container { flex: 1; min-width: 300px; padding: 50px; }
+        @media (max-width: 768px) { .contact-form-container { padding: 30px 20px; } .contact-map-overlay { padding: 30px 20px; } }
+        .form-input { width: 100%; padding: 15px; background: var(--bg-light); border: 1px solid #eee; border-radius: 8px; margin-bottom: 20px; font-family: var(--font-body); }
+        .form-input:focus { outline: none; border-color: var(--primary); }
+        .contact-item { margin-bottom: 25px; display: flex; align-items: flex-start; gap: 15px; }
+        #faq details { background: var(--white); border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px; }
+        #faq summary { padding: 15px 10px; cursor: pointer; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        #faq summary::after { content: '+'; font-size: 1.5rem; color: var(--accent); font-weight: 300; }
+        #faq details[open] summary::after { content: '-'; }
+        #faq details[open] summary { color: var(--primary); }
+        #faq .faq-answer { color: var(--text-light); padding: 0 10px 20px 10px; }
+
         /* FOOTER */
-        footer { background: #1A1A1A; color: #aaa; padding: 80px 0 30px; }
-        
+        footer {
+            background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80') no-repeat center/cover;
+            position: relative;
+            padding: 80px 0 30px;
+            color: #e0e0e0; /* Texto claro para contraste */
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 51, 102, 0.95); /* Azul oscuro con alta opacidad */
+            z-index: 1;
+        }
+
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+
         .footer-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr 1fr;
@@ -791,7 +677,7 @@
         .footer-title { color: var(--white); margin-bottom: 25px; font-size: 1.1rem; font-family: var(--font-heading); }
         
         .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: #aaa; transition: var(--transition); }
+        .footer-links a { color: #ccc; transition: var(--transition); }
         .footer-links a:hover { color: var(--accent); padding-left: 5px; }
         
         .copyright {
@@ -800,26 +686,59 @@
             padding-top: 20px; 
             text-align: center; 
             font-size: 0.85rem;
+            color: #ccc;
         }
         
         .btn-form {
             width: 100%;
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 15px; 
-            border-radius: 50px; 
-            cursor: pointer; 
+            background: linear-gradient(45deg, var(--primary), #00509E);
+            color: var(--white);
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            cursor: pointer;
             transition: var(--transition);
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
         }
-        .btn-form:hover { background: var(--accent); color: white; box-shadow: 0 8px 25px rgba(0, 51, 102, 0.3); }
+        .btn-form:hover { 
+            background: var(--accent); /* Naranja al hover */
+            color: white; 
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4); 
+            transform: translateY(-3px);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px; /* MOVED TO RIGHT CORNER */
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 35px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 10000; /* High z-index */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E; /* Darker green on hover */
+            color: #FFF;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
 
-    <!-- MENU FLOTANTE BOOTSTRAP -->
+    <!-- MENU FLOTANTE BOOTSTRAP (CON CORRECCIÓN DE MÁRGENES EN MÓVIL) -->
     <nav class="navbar navbar-expand-lg fixed-top mx-3 mt-3 navbar-floating">
         <div class="container-fluid">
             <!-- Brand -->
@@ -851,9 +770,9 @@
     <section id="hero">
         <!-- Carrusel de Fondo -->
         <div class="hero-slider">
-            <div class="hero-slide active" style="background-image: url('https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');"></div>
-            <div class="hero-slide" style="background-image: url('https://cdn.pixabay.com/photo/2016/05/09/17-26-background-texture-1382002_640.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('https://us.123rf.com/450wm/avagyanlevon/avagyanlevon2209/avagyanlevon220900008/191118070-tel%C3%B3n-de-fondo-de-panal-azul-y-amarillo.jpg?ver=6');"></div>
+            <div class="hero-slide active" style="background-image: url('./image/imagen-inicio.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('./image/imagen-inicio2.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('./image/imagen-inicio3.jpg');"></div>
         </div>
 
         <div class="hero-overlay"></div>
@@ -900,78 +819,156 @@
                 <h2>Soluciones Integrales</h2>
             </div>
 
-            <div class="services-grid">
-                <article class="service-card">
-                    <div class="service-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80" alt="Instalación Aire">
-                        <div class="service-price-tag">Garantizado</div>
-                    </div>
-                    <div class="service-content">
-                        <div class="service-icon-wrapper"><i class="fas fa-tools service-icon"></i></div>
-                        <h3>Instalación de Aires Split</h3>
-                        <p>Instalación profesional de equipos nuevos o usados, respetando las normativas.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Colocación prolija de unidades</li>
-                            <li><i class="fas fa-check-circle"></i> Vacío de cañerías</li>
-                            <li><i class="fas fa-check-circle"></i> Materiales de 1ra calidad</li>
-                        </ul>
-                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Maximiza la vida útil.</div>
-                    </div>
-                </article>
+            <!-- WRAPPER PARA OCULTAR EL SCROLL HORIZONTAL EN MÓVIL -->
+            <div class="services-track-wrapper">
+                <div class="services-grid">
+                    <!-- TARJETAS ORIGINALES (Visibles en escritorio) -->
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro-servicio1.jpeg" alt="Instalación Aire">
+                            <div class="service-price-tag">Garantizado</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-tools service-icon"></i></div>
+                            <h3>Instalación de Aires Split</h3>
+                            <p>Instalación profesional de equipos nuevos o usados, respetando las normativas.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Colocación prolija de unidades</li>
+                                <li><i class="fas fa-check-circle"></i> Vacío de cañerías</li>
+                                <li><i class="fas fa-check-circle"></i> Materiales de 1ra calidad</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Maximiza la vida útil.</div>
+                        </div>
+                    </article>
 
-                <article class="service-card">
-                    <div class="service-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1581094794329-cd1096d7a43f?auto=format&fit=crop&q=80" alt="Reparación">
-                        <div class="service-price-tag">Urgencias</div>
-                    </div>
-                    <div class="service-content">
-                        <div class="service-icon-wrapper"><i class="fas fa-snowflake service-icon"></i></div>
-                        <h3>Reparación y Mantenimiento</h3>
-                        <p>Diagnóstico preciso y solución rápida para todas las marcas de Split.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Carga de gas refrigerante</li>
-                            <li><i class="fas fa-check-circle"></i> Limpieza profunda</li>
-                            <li><i class="fas fa-check-circle"></i> Reparación de placas</li>
-                        </ul>
-                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Aire más puro y eficiente.</div>
-                    </div>
-                </article>
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro-servicio2.jpeg" alt="Reparación">
+                            <div class="service-price-tag">Urgencias</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-snowflake service-icon"></i></div>
+                            <h3>Reparación y Mantenimiento</h3>
+                            <p>Diagnóstico preciso y solución rápida para todas las marcas de Split.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Carga de gas refrigerante</li>
+                                <li><i class="fas fa-check-circle"></i> Limpieza profunda</li>
+                                <li><i class="fas fa-check-circle"></i> Reparación de placas</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Aire más puro y eficiente.</div>
+                        </div>
+                    </article>
 
-                <article class="service-card">
-                    <div class="service-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1626806775351-538af710a40b?auto=format&fit=crop&q=80" alt="Lavarropas">
-                        <div class="service-price-tag">A Domicilio</div>
-                    </div>
-                    <div class="service-content">
-                        <div class="service-icon-wrapper"><i class="fas fa-soap service-icon"></i></div>
-                        <h3>Reparación de Lavarropas</h3>
-                        <p>Servicio técnico para lavarropas automáticos. Solucionamos fallas en el día.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Cambio de bombas</li>
-                            <li><i class="fas fa-check-circle"></i> Reparación de plaquetas</li>
-                            <li><i class="fas fa-check-circle"></i> Presupuesto a domicilio</li>
-                        </ul>
-                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Ahorrá reparando tu equipo.</div>
-                    </div>
-                </article>
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro.servicio3.jpg" alt="Lavarropas">
+                            <div class="service-price-tag">A Domicilio</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-soap service-icon"></i></div>
+                            <h3>Reparación de Lavarropas</h3>
+                            <p>Servicio técnico para lavarropas automáticos. Solucionamos fallas en el día.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Cambio de bombas</li>
+                                <li><i class="fas fa-check-circle"></i> Reparación de plaquetas</li>
+                                <li><i class="fas fa-check-circle"></i> Presupuesto a domicilio</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Ahorrá reparando tu equipo.</div>
+                        </div>
+                    </article>
 
-                <article class="service-card">
-                    <div class="service-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&q=80" alt="Electricidad">
-                        <div class="service-price-tag">Matriculado</div>
-                    </div>
-                    <div class="service-content">
-                        <div class="service-icon-wrapper"><i class="fas fa-bolt service-icon"></i></div>
-                        <h3>Electricidad Domiciliaria</h3>
-                        <p>Soluciones eléctricas seguras. Reparaciones, instalaciones y mejoras.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Cambio de tomas y teclas</li>
-                            <li><i class="fas fa-check-circle"></i> Detección de cortos</li>
-                            <li><i class="fas fa-check-circle"></i> Instalación de luminarias</li>
-                        </ul>
-                        <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Seguridad eléctrica garantizada.</div>
-                    </div>
-                </article>
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro-servicio4.webp" alt="Electricidad">
+                            <div class="service-price-tag">Matriculado</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-bolt service-icon"></i></div>
+                            <h3>Electricidad Domiciliaria</h3>
+                            <p>Soluciones eléctricas seguras. Reparaciones, instalaciones y mejoras.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Cambio de tomas y teclas</li>
+                                <li><i class="fas fa-check-circle"></i> Detección de cortos</li>
+                                <li><i class="fas fa-check-circle"></i> Instalación de luminarias</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Seguridad eléctrica garantizada.</div>
+                        </div>
+                    </article>
+                    
+                    <!-- TARJETAS DUPLICADAS PARA CARRUSEL INFINITO EN MÓVIL -->
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro-servicio1.jpeg" alt="Instalación Aire">
+                            <div class="service-price-tag">Garantizado</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-tools service-icon"></i></div>
+                            <h3>Instalación de Aires Split</h3>
+                            <p>Instalación profesional de equipos nuevos o usados, respetando las normativas.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Colocación prolija de unidades</li>
+                                <li><i class="fas fa-check-circle"></i> Vacío de cañerías</li>
+                                <li><i class="fas fa-check-circle"></i> Materiales de 1ra calidad</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Maximiza la vida útil.</div>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro-servicio2.jpeg" alt="Reparación">
+                            <div class="service-price-tag">Urgencias</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-snowflake service-icon"></i></div>
+                            <h3>Reparación y Mantenimiento</h3>
+                            <p>Diagnóstico preciso y solución rápida para todas las marcas de Split.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Carga de gas refrigerante</li>
+                                <li><i class="fas fa-check-circle"></i> Limpieza profunda</li>
+                                <li><i class="fas fa-check-circle"></i> Reparación de placas</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Aire más puro y eficiente.</div>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro.servicio3.jpg" alt="Lavarropas">
+                            <div class="service-price-tag">A Domicilio</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-soap service-icon"></i></div>
+                            <h3>Reparación de Lavarropas</h3>
+                            <p>Servicio técnico para lavarropas automáticos. Solucionamos fallas en el día.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Cambio de bombas</li>
+                                <li><i class="fas fa-check-circle"></i> Reparación de plaquetas</li>
+                                <li><i class="fas fa-check-circle"></i> Presupuesto a domicilio</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Ahorrá reparando tu equipo.</div>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-img-wrapper">
+                            <img src="./image/nuestro-servicio4.webp" alt="Electricidad">
+                            <div class="service-price-tag">Matriculado</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon-wrapper"><i class="fas fa-bolt service-icon"></i></div>
+                            <h3>Electricidad Domiciliaria</h3>
+                            <p>Soluciones eléctricas seguras. Reparaciones, instalaciones y mejoras.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Cambio de tomas y teclas</li>
+                                <li><i class="fas fa-check-circle"></i> Detección de cortos</li>
+                                <li><i class="fas fa-check-circle"></i> Instalación de luminarias</li>
+                            </ul>
+                            <div class="service-benefit"><i class="fas fa-star"></i> Beneficio: Seguridad eléctrica garantizada.</div>
+                        </div>
+                    </article>
+                    
+                </div>
             </div>
         </div>
     </section>
@@ -981,7 +978,6 @@
         <div class="container">
             <div class="section-title">
                 <span>Herramienta Útil</span>
-                <!-- Título Actualizado -->
                 <h2>Calculá las frigorías para ahorrar en la compra de tu Aire</h2>
                 <p>Solo tenés que ingresar las medidas, el tipo de vivienda y la cantidad de personas.</p>
             </div>
@@ -1050,7 +1046,7 @@
             
             <p class="mt-4 fw-bold">Vos solo tenés que avisarnos, del resto nos encargamos nosotros.</p>
             
-            <a href="#contacto" class="btn btn-nav-cta mt-4" style="display: inline-block;">Solicitar Retiro</a>
+            <a href="#contacto" class="btn btn-nav-cta mt-4" class="btn-retiro">Solicitar Retiro</a>
         </div>
     </section>
 
@@ -1067,27 +1063,53 @@
                 <p>Podés seguirnos y contactarnos por la red que te resulte más cómoda. Encontrarás información actualizada, fotos de nuestros trabajos realizados y vías de comunicación directa con nuestro equipo.</p>
             </div>
 
-            <div class="redes-grid">
-                <a href="#" target="_blank" class="red-item">
-                    <i class="fa-brands fa-instagram red-icon insta"></i>
-                    <h4>Instagram</h4>
-                    <p>Explorá nuestra galería de proyectos y consejos visuales.</p>
-                </a>
-                <a href="#" target="_blank" class="red-item">
-                    <i class="fa-brands fa-tiktok red-icon tiktok"></i>
-                    <h4>TikTok</h4>
-                    <p>Descubrí tips rápidos y tutoriales del detrás de escena.</p>
-                </a>
-                <a href="#" target="_blank" class="red-item">
-                    <i class="fa-brands fa-facebook-f red-icon facebook"></i>
-                    <h4>Facebook</h4>
-                    <p>Unite a nuestra comunidad para recibir novedades y ver reseñas.</p>
-                </a>
-                <a href="https://wa.me/541155555555" target="_blank" class="red-item">
-                    <i class="fa-brands fa-whatsapp red-icon whatsapp"></i>
-                    <h4>WhatsApp</h4>
-                    <p>Comunicación directa e inmediata para consultas.</p>
-                </a>
+            <!-- WRAPPER PARA CARRUSEL EN MÓVIL -->
+            <div class="redes-track-wrapper">
+                <div class="redes-grid">
+                    <!-- ORIGINALES -->
+                    <a href="#" target="_blank" class="red-item">
+                        <i class="fa-brands fa-instagram red-icon insta"></i>
+                        <h4>Instagram</h4>
+                        <p>Explorá nuestra galería de proyectos y consejos visuales.</p>
+                    </a>
+                    <a href="#" target="_blank" class="red-item">
+                        <i class="fa-brands fa-tiktok red-icon tiktok"></i>
+                        <h4>TikTok</h4>
+                        <p>Descubrí tips rápidos y tutoriales del detrás de escena.</p>
+                    </a>
+                    <a href="#" target="_blank" class="red-item">
+                        <i class="fa-brands fa-facebook-f red-icon facebook"></i>
+                        <h4>Facebook</h4>
+                        <p>Unite a nuestra comunidad para recibir novedades y ver reseñas.</p>
+                    </a>
+                    <a href="https://wa.me/541155555555" target="_blank" class="red-item">
+                        <i class="fa-brands fa-whatsapp red-icon whatsapp"></i>
+                        <h4>WhatsApp</h4>
+                        <p>Comunicación directa e inmediata para consultas.</p>
+                    </a>
+
+                    <!-- DUPLICADOS PARA CARRUSEL INFINITO EN MÓVIL -->
+                    <a href="#" target="_blank" class="red-item">
+                        <i class="fa-brands fa-instagram red-icon insta"></i>
+                        <h4>Instagram</h4>
+                        <p>Explorá nuestra galería de proyectos y consejos visuales.</p>
+                    </a>
+                    <a href="#" target="_blank" class="red-item">
+                        <i class="fa-brands fa-tiktok red-icon tiktok"></i>
+                        <h4>TikTok</h4>
+                        <p>Descubrí tips rápidos y tutoriales del detrás de escena.</p>
+                    </a>
+                    <a href="#" target="_blank" class="red-item">
+                        <i class="fa-brands fa-facebook-f red-icon facebook"></i>
+                        <h4>Facebook</h4>
+                        <p>Unite a nuestra comunidad para recibir novedades y ver reseñas.</p>
+                    </a>
+                    <a href="https://wa.me/541155555555" target="_blank" class="red-item">
+                        <i class="fa-brands fa-whatsapp red-icon whatsapp"></i>
+                        <h4>WhatsApp</h4>
+                        <p>Comunicación directa e inmediata para consultas.</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1343,25 +1365,44 @@
             <div class="marcas-container">
                 <div class="marcas-track">
                     <!-- Placeholder Brands -->
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Philco" alt="Philco"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Samsung" alt="Samsung"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Sanyo" alt="Sanyo"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=TopHouse" alt="TopHouse"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Bosch" alt="Bosch"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Whirlpool" alt="Whirlpool"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=BGH" alt="BGH"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Candy" alt="Candy"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Carrier" alt="Carrier"></div>
+                    <div class="marca-item"><img src="./image/marca-philco.png" alt="Philco"></div>
+                    <div class="marca-item"><img src="./image/marca-samsung.png" alt="Samsung"></div>
+                    <div class="marca-item"><img src="./image/marca-sanyo.png" alt="Sanyo"></div>
+                    <div class="marca-item"><img src="./image/marca-tophouse.png" alt="TopHouse"></div>
+                    <div class="marca-item"><img src="./image/marcas-bosch.png" alt="Bosch"></div>
+                    <div class="marca-item"><img src="./image/marcas-whirlpool.png" alt="Whirlpool"></div>
+                    <div class="marca-item"><img src="./image/marca-bgh.png" alt="BGH"></div>
+                    <div class="marca-item"><img src="./image/marca-candy.png" alt="Candy"></div>
+                    <div class="marca-item"><img src="./image/marca-carrier.png" alt="Carrier"></div>
                     <!-- Duplicate -->
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Electra" alt="Electra"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Electrolux" alt="Electrolux"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=GE" alt="GE"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Midea" alt="Midea"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Longvie" alt="Longvie"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Patrick" alt="Patrick"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Coventry" alt="Coventry"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Firstline" alt="Firstline"></div>
-                    <div class="marca-item"><img src="https://placehold.co/150x80?text=Eslabon" alt="Eslabón"></div>
+                    <div class="marca-item"><img src="./image/marca-electra.png" alt="Electra"></div>
+                    <div class="marca-item"><img src="./image/marca-electrolux.png" alt="Electrolux"></div>
+                    <div class="marca-item"><img src="./image/marcas-ge.png" alt="GE"></div>
+                    <div class="marca-item"><img src="./image/marca-midea.png" alt="Midea"></div>
+                    <div class="marca-item"><img src="./image/marcas-longvie.png" alt="Longvie"></div>
+                    <div class="marca-item"><img src="./image/marcas-patrick.png" alt="Patrick"></div>
+                    <div class="marca-item"><img src="./image/marca-coventry.png" alt="Coventry"></div>
+                    <div class="marca-item"><img src="./image/marca-firstline.png" alt="Firstline"></div>
+                    <div class="marca-item"><img src="./image/marcas-eslabondelujo.png" alt="Eslabón"></div>
+                    <!-- Duplicate for infinity -->
+                    <div class="marca-item"><img src="./image/marca-philco.png" alt="Philco"></div>
+                    <div class="marca-item"><img src="./image/marca-samsung.png" alt="Samsung"></div>
+                    <div class="marca-item"><img src="./image/marca-sanyo.png" alt="Sanyo"></div>
+                    <div class="marca-item"><img src="./image/marca-tophouse.png" alt="TopHouse"></div>
+                    <div class="marca-item"><img src="./image/marcas-bosch.png" alt="Bosch"></div>
+                    <div class="marca-item"><img src="./image/marcas-whirlpool.png" alt="Whirlpool"></div>
+                    <div class="marca-item"><img src="./image/marca-bgh.png" alt="BGH"></div>
+                    <div class="marca-item"><img src="./image/marca-candy.png" alt="Candy"></div>
+                    <div class="marca-item"><img src="./image/marca-carrier.png" alt="Carrier"></div>
+                    <div class="marca-item"><img src="./image/marca-electra.png" alt="Electra"></div>
+                    <div class="marca-item"><img src="./image/marca-electrolux.png" alt="Electrolux"></div>
+                    <div class="marca-item"><img src="./image/marcas-ge.png" alt="GE"></div>
+                    <div class="marca-item"><img src="./image/marca-midea.png" alt="Midea"></div>
+                    <div class="marca-item"><img src="./image/marcas-longvie.png" alt="Longvie"></div>
+                    <div class="marca-item"><img src="./image/marcas-patrick.png" alt="Patrick"></div>
+                    <div class="marca-item"><img src="./image/marca-coventry.png" alt="Coventry"></div>
+                    <div class="marca-item"><img src="./image/marca-firstline.png" alt="Firstline"></div>
+                    <div class="marca-item"><img src="./image/marcas-eslabondelujo.png" alt="Eslabón"></div>
                 </div>
             </div>
         </div>
@@ -1377,7 +1418,7 @@
                         <i class="fas fa-snowflake logo-fallback" style="display:none;"></i>
                         <span class="brand-text">COOLPOWER<span>refrigeración</span></span>
                     </a>
-                    <p>Somos especialistas en climatización y electrodomésticos de línea blanca. Comprometidos con la calidad en CABA y alrededores.</p>
+                    <p>Somos especialistas en climatización y electrodomésticos de línea blanca. Comprometidos con la calidad, la rapidez y la satisfacción de nuestros clientes en CABA y alrededores.</p>
                 </div>
                 
                 <div class="footer-nav">
@@ -1405,6 +1446,11 @@
             </div>
         </div>
     </footer>
+    
+    <!-- WHATSAPP FLOAT BUTTON -->
+    <a href="https://wa.me/541155555555" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- BOOTSTRAP 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1424,7 +1470,6 @@
 
         // Lógica de la Calculadora de Frigorías
         function calcularFrigorias() {
-            // 1. Obtener valores y referencias
             const ancho = parseFloat(document.getElementById('calc-ancho').value);
             const largo = parseFloat(document.getElementById('calc-largo').value);
             const alto = parseFloat(document.getElementById('calc-alto').value);
@@ -1435,7 +1480,6 @@
             const resultBox = document.getElementById('calc-result');
             const resultText = document.getElementById('result-text');
 
-            // 2. Validaciones
             if (isNaN(ancho) || ancho <= 0 || 
                 isNaN(largo) || largo <= 0 || 
                 isNaN(alto) || alto <= 0 || 
@@ -1448,12 +1492,10 @@
 
             errorMsg.style.display = 'none';
 
-            // 3. Lógica de Cálculo
             const volumen = ancho * largo * alto;
             let frigorias = volumen * 45;
             frigorias = frigorias * factorTipo;
 
-            // Ajuste por personas (100 frigorías por persona extra a partir de la 3ra)
             if (personas > 2) {
                 const personasExtra = personas - 2;
                 frigorias += (personasExtra * 100);
@@ -1461,7 +1503,6 @@
 
             const frigoriasFinales = Math.round(frigorias);
 
-            // 4. Mostrar Resultado
             resultText.innerHTML = `Para este ambiente se recomienda un equipo de aproximadamente <span class="calc-highlight">${frigoriasFinales}</span> frigorías.`;
             resultBox.style.display = 'block';
         }
