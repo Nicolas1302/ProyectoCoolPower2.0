@@ -40,12 +40,16 @@
         }
 
         /* Reset básico y tipografía */
+        html, body {
+            overflow-x: hidden; /* CORRECCIÓN DESBORDE: Asegura que nada se salga del ancho */
+            width: 100%;
+        }
+
         body {
             font-family: var(--font-body); /* Aplicado a todo el cuerpo */
             color: var(--text-dark);
             background-color: var(--white);
             padding-top: 0;
-            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5 { 
@@ -125,11 +129,21 @@
 
         @media (max-width: 991px) {
             .navbar-floating {
-                border-radius: 0; /* Bordes rectos para ocupar todo el ancho */
+                border-radius: 0; 
                 padding: 0.8rem 1rem;
-                margin: 0 !important; /* ELIMINA MARGENES mx-3 mt-3 */
-                width: 100%; /* Ocupa el ancho completo */
+                margin: 0 !important; 
+                width: 100%; 
+                left: 0; /* Asegurar posición izquierda 0 */
+                right: 0; /* Asegurar posición derecha 0 */
             }
+            
+            .navbar-toggler { 
+                display: none !important; 
+            }
+            .navbar-collapse { 
+                display: none !important; 
+            }
+
             .navbar-collapse {
                 margin-top: 15px;
                 background: var(--white);
@@ -140,6 +154,29 @@
             .nav-link { margin: 8px 0; padding: 5px 0; border-bottom: 1px solid #f0f0f0; }
             .btn-nav-cta { width: 100%; text-align: center; margin-top: 15px; }
         }
+
+        /* MODIFICACIÓN: Ajuste específico para evitar desborde en móviles pequeños */
+        @media (max-width: 576px) {
+            .navbar-floating {
+                padding: 0.5rem !important; /* Reducir padding del contenedor */
+            }
+            .navbar-brand {
+                font-size: 0.85rem !important; /* Reducir tamaño de fuente del texto */
+                gap: 8px; /* Reducir espacio entre logo y texto */
+                max-width: 100%; /* Evitar que empuje el ancho */
+                white-space: nowrap; /* Mantener en una línea si es posible, o cambiar a normal si prefieres que baje */
+            }
+            .logo-img {
+                height: 35px; /* Logo más pequeño en móvil */
+            }
+            /* Opcional: Ocultar la parte "refrigeración" si es muy largo, o hacerlo más pequeño */
+            .brand-text span {
+                display: block; /* Poner "refrigeración" debajo de COOLPOWER para ahorrar ancho */
+                font-size: 0.75rem;
+                line-height: 1;
+            }
+        }
+        /* FIN MODIFICACIÓN */
 
         /* =========================================
            HERO SECTION
@@ -157,6 +194,7 @@
             background-position: center;
             background-size: cover;
             background-image: url('https://images.unsplash.com/photo-1621905251189-fc015acafd03?auto=format&fit=crop&q=80');
+            overflow: hidden; /* CORRECCIÓN DESBORDE: Importante para recortar la marca de agua */
         }
 
         @media (max-width: 768px) {
@@ -217,6 +255,8 @@
         /* Estilo para el logo en la sección Hero */
         .hero-logo-container {
             margin-bottom: 25px;
+            position: relative; /* Para z-index */
+            z-index: 3;
         }
         .hero-logo {
             width: 100px; 
@@ -224,6 +264,47 @@
             max-width: 100%; 
             height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); /* Sombra suave para que flote */
+        }
+
+        /* MODIFICACIÓN: Nuevo estilo para el logo dentro del título */
+        .hero-logo-inline {
+            height: 1.1em; /* El tamaño se adapta a la fuente del H1 (aprox un 10% más grande que la letra) */
+            width: auto;
+            vertical-align: bottom; /* Alineado a la base para que quede junto a la R */
+            margin: 0 15px; /* Espacio a los costados */
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+            position: relative;
+            top: -5px; /* Ajuste fino para centrado óptico */
+        }
+        
+        @media (max-width: 768px) {
+            .hero-logo-inline {
+                margin: 0 8px; /* Menos espacio en móvil */
+                display: inline-block; /* Asegura comportamiento correcto */
+            }
+        }
+        /* FIN MODIFICACIÓN */
+
+        /* IDEA 1: MARCA DE AGUA EN HERO */
+        .hero-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            width: 600px; /* Tamaño grande */
+            opacity: 0.04; /* Muy sutil */
+            z-index: 0;
+            pointer-events: none; /* Que no moleste al click */
+            filter: grayscale(100%) brightness(200%); /* Efecto silueta blanca */
+        }
+        
+        /* IDEA 2: LOGO INTERACTIVO EN NAVBAR */
+        .navbar-brand .logo-img {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+        }
+        .navbar-brand:hover .logo-img {
+            transform: rotate(20deg) scale(1.1);
         }
 
         /* Estilo para el nuevo subtitulo */
@@ -242,6 +323,7 @@
             margin-bottom: 40px;
             color: var(--white);
             text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            word-wrap: break-word; /* CORRECCIÓN: Permite que palabras largas se rompan si es necesario */
         }
         
         /* Ajuste de margin para el nuevo h1 */
@@ -298,11 +380,11 @@
 
         @media (max-width: 768px) {
             .hero-inner {
-                padding: 30px 20px;
+                padding: 30px 10px; /* CORRECCIÓN DESBORDE: Menos padding lateral en móvil */
             }
-            .hero-content h1 { font-size: 2.5rem; margin-bottom: 15px; }
-            .hero-content h1.brand-headline { font-size: 2.2rem; }
-            .hero-subheadline { font-size: 1.1rem; margin-bottom: 30px; }
+            .hero-content h1 { font-size: 2.2rem; margin-bottom: 15px; } /* CORRECCIÓN: Fuente más chica */
+            .hero-content h1.brand-headline { font-size: 1.8rem; } /* CORRECCIÓN: Fuente más chica */
+            .hero-subheadline { font-size: 1rem; margin-bottom: 30px; }
             .hero-search-box { flex-direction: column; border-radius: 20px; gap: 0; padding: 15px; width: 100%; }
             .hero-input-group { width: 100%; border-right: none; border-bottom: 1px solid #eee; padding: 15px 0; justify-content: flex-start; }
             .hero-cta { width: 100%; border-radius: 12px; margin-top: 15px; height: 45px; }
@@ -431,7 +513,19 @@
            CALCULADORA DE FRIGORÍAS
            ========================================= */
         #calculadora { background-color: var(--white); }
-        .calc-wrapper { background: var(--bg-light); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-card); max-width: 760px; margin: 0 auto; border: 1px solid #eee; }
+        .calc-wrapper { 
+            background: var(--bg-light); 
+            border-radius: var(--radius); 
+            padding: 40px; 
+            box-shadow: var(--shadow-card); 
+            max-width: 760px; 
+            margin: 0 auto; 
+            border: 1px solid #eee; 
+        }
+        @media (max-width: 576px) {
+            .calc-wrapper { padding: 25px 15px; } /* CORRECCIÓN DESBORDE: Menos padding */
+        }
+
         .calc-form-group { margin-bottom: 20px; text-align: left; }
         .calc-label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark); font-size: 0.9rem; }
         .calc-input { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body); font-size: 1rem; transition: var(--transition); }
@@ -612,13 +706,25 @@
 
         /* CONTACTO & FAQ */
         .contact-section-wrapper { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-wrap: wrap; }
-        .contact-map-image { flex: 1; min-width: 300px; background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80') center/cover; position: relative; min-height: 300px; }
+        .contact-map-image { flex: 1; min-width: 300px; background: url('./image/image-contacto.jpeg') center/cover; position: relative; min-height: 300px; }
         .contact-map-overlay { position: absolute; top:0; left:0; width: 100%; height: 100%; background: rgba(0, 51, 102, 0.85); display: flex; flex-direction: column; justify-content: center; padding: 40px; color: var(--white); }
         .contact-form-container { flex: 1; min-width: 300px; padding: 50px; }
         @media (max-width: 768px) { .contact-form-container { padding: 30px 20px; } .contact-map-overlay { padding: 30px 20px; } }
         .form-input { width: 100%; padding: 15px; background: var(--bg-light); border: 1px solid #eee; border-radius: 8px; margin-bottom: 20px; font-family: var(--font-body); }
         .form-input:focus { outline: none; border-color: var(--primary); }
         .contact-item { margin-bottom: 25px; display: flex; align-items: flex-start; gap: 15px; }
+
+        /* MODIFICACIÓN: Color naranja para los títulos de contacto */
+        .contact-map-overlay h3 { 
+            color: var(--accent); 
+            margin-bottom: 25px; /* Añadido un poco de espacio */
+        }
+        .contact-item h5 { 
+            color: var(--accent); 
+            margin: 0 0 5px 0; /* Ajuste fino del margen */
+        }
+        /* FIN MODIFICACIÓN */
+
         #faq details { background: var(--white); border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px; }
         #faq summary { padding: 15px 10px; cursor: pointer; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; list-style: none; }
         #faq summary::after { content: '+'; font-size: 1.5rem; color: var(--accent); font-weight: 300; }
@@ -661,6 +767,15 @@
         @media (max-width: 768px) {
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
         }
+
+        /* MODIFICACIÓN: Ocultar navegación y contacto directo en móviles pequeños (<600px) */
+        @media (max-width: 600px) {
+            .footer-nav, 
+            .footer-contact {
+                display: none;
+            }
+        }
+        /* FIN MODIFICACIÓN */
 
         .footer-logo { 
             color: var(--white); 
@@ -778,13 +893,20 @@
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="hero-inner">
-                <!-- Logo Grande en el Hero -->
-                <div class="hero-logo-container">
-                    <img src="./image/logo3.png" alt="COOLPOWER Logo" class="hero-logo">
-                </div>
+                
+                <!-- IDEA 1: IMAGEN MARCA DE AGUA (FONDO) -->
+                <!-- Se usa el mismo logo pero con clase especial para fondo sutil -->
+                <img src="./image/logo3.png" class="hero-watermark" alt="">
+
+                <!-- MODIFICACIÓN: Logo movido dentro del H1 -->
                 
                 <!-- Título Principal (Nombre de la Empresa) -->
-                <h1 class="brand-headline">COOLPOWER REFRIGERACIÓN</h1>
+                <h1 class="brand-headline">
+                    COOLPOWER 
+                    <img src="./image/logo3.png" alt="COOLPOWER Logo" class="hero-logo-inline"> 
+                    REFRIGERACIÓN
+                </h1>
+                
                 <!-- Nuevo Subtítulo (Slogan) -->
                 <div class="hero-subheadline">Expertos en Climatización en Buenos Aires</div>
                 
@@ -826,7 +948,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro-servicio1.jpeg" alt="Instalación Aire">
-                            <div class="service-price-tag">Garantizado</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">Garantizado</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-tools service-icon"></i></div>
@@ -844,7 +966,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro-servicio2.jpeg" alt="Reparación">
-                            <div class="service-price-tag">Urgencias</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">Urgencias</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-snowflake service-icon"></i></div>
@@ -862,7 +984,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro.servicio3.jpg" alt="Lavarropas">
-                            <div class="service-price-tag">A Domicilio</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">A Domicilio</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-soap service-icon"></i></div>
@@ -880,7 +1002,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro-servicio4.webp" alt="Electricidad">
-                            <div class="service-price-tag">Matriculado</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">Matriculado</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-bolt service-icon"></i></div>
@@ -899,7 +1021,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro-servicio1.jpeg" alt="Instalación Aire">
-                            <div class="service-price-tag">Garantizado</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">Garantizado</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-tools service-icon"></i></div>
@@ -917,7 +1039,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro-servicio2.jpeg" alt="Reparación">
-                            <div class="service-price-tag">Urgencias</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">Urgencias</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-snowflake service-icon"></i></div>
@@ -935,7 +1057,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro.servicio3.jpg" alt="Lavarropas">
-                            <div class="service-price-tag">A Domicilio</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">A Domicilio</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-soap service-icon"></i></div>
@@ -953,7 +1075,7 @@
                     <article class="service-card">
                         <div class="service-img-wrapper">
                             <img src="./image/nuestro-servicio4.webp" alt="Electricidad">
-                            <div class="service-price-tag">Matriculado</div>
+                            <div class="service-price-tag" style="position:absolute; top:10px; right:10px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-weight:600; font-size:0.8rem;">Matriculado</div>
                         </div>
                         <div class="service-content">
                             <div class="service-icon-wrapper"><i class="fas fa-bolt service-icon"></i></div>
@@ -1046,7 +1168,7 @@
             
             <p class="mt-4 fw-bold">Vos solo tenés que avisarnos, del resto nos encargamos nosotros.</p>
             
-            <a href="#contacto" class="btn btn-nav-cta mt-4" class="btn-retiro">Solicitar Retiro</a>
+            <a href="#contacto" class="btn btn-nav-cta mt-4 btn-retiro">Solicitar Retiro</a>
         </div>
     </section>
 
@@ -1305,7 +1427,6 @@
                         <h3>Información</h3>
                         <div class="contact-item"><i class="fab fa-whatsapp"></i><div><h5>WhatsApp</h5><p>11 5555-5555</p></div></div>
                         <div class="contact-item"><i class="far fa-envelope"></i><div><h5>Email</h5><p>info@coolpowerrefrigeracion.com.ar</p></div></div>
-                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h5>Zona</h5><p>CABA y Alrededores</p></div></div>
                     </div>
                 </div>
                 
@@ -1348,22 +1469,8 @@
                         transition: opacity 0.5s; 
                         pointer-events: none; 
                     ">
-                       
+                        
                     </div>
-
-                    <!-- <form action="#" method="POST">
-                        <input type="text" class="form-input" placeholder="Nombre Completo" required>
-                        <input type="tel" class="form-input" placeholder="Teléfono" required>
-                        <select class="form-input">
-                            <option>Tipo de Servicio</option>
-                            <option>Reparación Aire</option>
-                            <option>Instalación Aire</option>
-                            <option>Lavarropas</option>
-                            <option>Electricidad</option>
-                        </select>
-                        <textarea rows="4" class="form-input" placeholder="Mensaje"></textarea>
-                        <button type="submit" class="btn-form">Enviar Consulta</button>
-                    </form> -->
                 </div>
             </div>
 
@@ -1475,14 +1582,14 @@
                 <div class="footer-contact">
                     <h4 class="footer-title">Contacto Directo</h4>
                     <ul class="footer-links">
-                        <li><a href="https://wa.me/543764820719"><i class="fab fa-whatsapp" style="color:#25D366; font-size: 1.1rem;"></i> 11 5555-5555</a></li>
+                        <li><a href="https://wa.me/543764820719"><i class="fab fa-whatsapp" style="color:#25D366; font-size: 1.1rem;"></i> 3764820719</a></li>
                         <li><span><i class="far fa-clock" style="font-size: 1rem;"></i> Lun-Sáb: 8 a 19hs</span></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2023 COOLPOWERrefrigeración. Todos los derechos reservados. | Diseño web optimizado para SEO local.
+                &copy; 2023 COOLPOWERrefrigeración. Todos los derechos reservados.
             </div>
         </div>
     </footer>
