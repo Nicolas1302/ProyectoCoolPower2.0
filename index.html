@@ -859,6 +859,127 @@
             color: #FFF;
             transform: scale(1.1);
         }
+
+        /* Felices Fiestas =========================================================================================================================== */
+
+
+        /* Contenedor principal con fondo nocturno */
+        .holiday-section {
+            position: relative;
+            /* Degradado azul oscuro radial para simular cielo nocturno */
+            background: radial-gradient(circle at 50% 100%, #1e3a8a 0%, #0f172a 100%);
+            overflow: hidden; /* Importante para que los fuegos no se salgan */
+            padding: 4rem 0;
+            color: #ffffff;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* Asegura que el texto esté por encima de los fuegos artificiales */
+        .holiday-content {
+            position: relative;
+            z-index: 2; 
+        }
+
+        /* Estilo del título con degradado metálico/brillante */
+        .holiday-title {
+            font-weight: 800;
+            font-size: 2.5rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        /* --- ANIMACIÓN DE FUEGOS ARTIFICIALES (PURE CSS) --- */
+
+        @keyframes firework {
+            0% { transform: translate(var(--x), var(--initialY)); width: var(--initialSize); opacity: 1; }
+            50% { width: 0.5vmin; opacity: 1; }
+            100% { width: var(--finalSize); opacity: 0; }
+        }
+
+        /* Configuración base de la partícula */
+        .firework,
+        .firework::before,
+        .firework::after {
+            --initialSize: 0.5vmin;
+            --finalSize: 45vmin;
+            --particleSize: 0.2vmin;
+            --color1: yellow;
+            --color2: khaki;
+            --color3: white;
+            --color4: lime;
+            --color5: gold;
+            --color6: mediumseagreen;
+            --y: -30vmin;
+            --x: -50%;
+            --initialY: 60vmin;
+            content: "";
+            animation: firework 2s infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, var(--y));
+            width: var(--initialSize);
+            aspect-ratio: 1;
+            /* Creamos los puntos de luz usando gradientes radiales múltiples */
+            background: 
+                radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
+                radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
+                radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 50% 100%,
+                radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 0% 50%,
+                /* Segundo anillo de explosión */
+                radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 80% 90%,
+                radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 95% 90%,
+                radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 90% 70%,
+                radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 60%,
+                radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 55% 80%,
+                radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 70% 77%;
+            background-size: var(--initialSize) var(--initialSize);
+            background-repeat: no-repeat;
+        }
+
+        /* Variaciones para hacer la explosión más redonda y 3D */
+        .firework::before {
+            --x: -50%;
+            --y: -50%;
+            --initialY: -50%;
+            transform: translate(-50%, -50%) rotate(40deg) scale(1.3) rotateY(40deg);
+        }
+
+        .firework::after {
+            --x: -50%;
+            --y: -50%;
+            --initialY: -50%;
+            transform: translate(-50%, -50%) rotate(170deg) scale(1.15) rotateY(-30deg);
+        }
+
+        /* --- Personalización de cada cohete --- */
+
+        /* Cohete 2: Azul y Violeta */
+        .firework:nth-child(2) {
+            --x: 30vmin;
+            --initialY: -40vmin; --y: -20vmin;
+            --color1: #276ffe; --color2: cyan; --color3: white; --color4: violet; --color5: fuchsia; --color6: orchid;
+            left: 30%;
+            top: 60%;
+            animation-delay: -0.4s;
+        }
+
+        /* Cohete 3: Rojo y Dorado */
+        .firework:nth-child(3) {
+            --x: -30vmin;
+            --initialY: -20vmin;
+            --y: -35vmin;
+            --color1: red; --color2: orange; --color3: white; --color4: tomato; --color5: gold; --color6: orangered;
+            left: 70%;
+            top: 50%;
+            animation-delay: -0.8s;
+        }
+
+        /* fIN CSS Felices Fiestas =========================================================================================================================== */
+
     </style>
 </head>
 <body>
@@ -942,6 +1063,34 @@
             </div>
         </div>
     </section>
+
+    <!-- ========================================= ========================================= =========================================
+         NUEVA SECCIÓN: FELICES FIESTAS
+         ========================================= ========================================= ========================================= -->
+    <section class="holiday-section">
+        <!-- Contenedor de fuegos artificiales (CSS puro) -->
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+
+        <div class="container holiday-content text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!-- Icono o emoji festivo opcional -->
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🎄✨</div>
+                    <h2 class="holiday-title">COOLPOWER REFRIGERACIÓN les desea Felices Fiestas</h2>
+                    <p class="holiday-text">
+                        En esta Navidad y Año Nuevo, queremos agradecerles su confianza. 
+                        Que sus hogares se llenen de paz, alegría y el clima perfecto para disfrutar en familia.
+                        <br><strong>¡Brindamos por un 2026 lleno de energía!</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========================================= ========================================= =========================================
+         FIN NUEVA SECCIÓN
+         ========================================= ==================================================================================-->
 
     <!-- SERVICIOS -->
     <section id="servicios" class="section-padding">
