@@ -420,42 +420,39 @@
             .service-card:nth-child(n+5) { display: none; }
         }
         
-        /* Móvil: Carrusel infinito */
+        /* ==========================================================
+           MODIFICACIÓN MOVIL: AUTO-SCROLL CON INTERACCIÓN (SERVICIOS)
+           ========================================================== */
         @media (max-width: 768px) {
-            /* Envoltura crítica para cortar el desbordamiento */
             .services-track-wrapper {
                 width: 100%;
-                overflow: hidden; /* Esto evita el scroll horizontal en el body */
+                overflow-x: auto; /* Permite scroll manual */
                 position: relative;
+                scroll-behavior: auto;
+                /* Ocultar barra de scroll para estética limpia */
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
             }
+            .services-track-wrapper::-webkit-scrollbar { display: none; }
 
             .services-grid {
                 display: flex;
-                width: calc(300px * 8 + 160px); /* Ancho total del track animado (8 tarjetas de 300px + gaps) */
+                /* Eliminamos el cálculo fijo ancho y la animación CSS */
+                width: max-content; 
                 gap: 20px;
-                animation: servicesScroll 30s linear infinite;
-                padding: 10px 0;
-                grid-template-columns: none;
-                /* Reset padding container */
-                margin-left: 0; margin-right: 0;
-                /* Padding-left para evitar que la primera se pegue al borde al inicio */
+                animation: none; /* ANIMACIÓN DESACTIVADA - SE USA JS */
+                padding: 10px 20px;
+                margin: 0;
                 padding-left: 20px;
             }
             
             #servicios .container { padding-left: 0; padding-right: 0; }
-
-            .services-grid:hover { animation-play-state: paused; }
 
             .service-card {
                 width: 300px; /* Ancho fijo en móvil */
                 flex-shrink: 0; /* No encoger */
                 display: flex !important; /* Mostrar todas las tarjetas (incluidas las duplicadas) */
             }
-        }
-
-        @keyframes servicesScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-1280px); } /* (300+20)*4 */
         }
 
 
@@ -581,27 +578,28 @@
             .red-item:nth-child(n+5) { display: none; }
         }
 
-        /* Móvil: Carrusel infinito */
+        /* ==========================================================
+           MODIFICACIÓN MOVIL: AUTO-SCROLL CON INTERACCIÓN (REDES)
+           ========================================================== */
         @media (max-width: 768px) {
             .redes-track-wrapper {
                 width: 100%;
-                overflow: hidden;
+                overflow-x: auto; /* Permite scroll manual */
                 position: relative;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
+            .redes-track-wrapper::-webkit-scrollbar { display: none; }
 
             .redes-grid {
                 display: flex;
-                grid-template-columns: none; /* Override grid */
-                /* Ancho: 280px card + 30px gap = 310px * 8 items = 2480px */
-                width: calc(310px * 8); 
+                grid-template-columns: none; 
+                width: max-content; 
                 gap: 30px;
-                animation: redesScroll 30s linear infinite;
+                animation: none; /* ANIMACIÓN DESACTIVADA - SE USA JS */
                 padding: 10px 0;
-                /* Add Left Padding for initial state */
                 padding-left: 20px;
             }
-            
-            .redes-grid:hover { animation-play-state: paused; }
             
             .red-item {
                 width: 280px;
@@ -609,15 +607,9 @@
                 display: block !important; /* Forzar visualización de duplicados */
             }
             
-            /* Ajustar container padding para que no corte la sombra */
             .redes-coolpower .container { padding-left: 0; padding-right: 0; }
         }
         
-        @keyframes redesScroll {
-            0% { transform: translateX(0); }
-            /* Desplazamiento de 4 items: (280 + 30) * 4 = 1240px */
-            100% { transform: translateX(-1240px); }
-        }
 
         .red-item {
             display: block; background: var(--white); padding: 40px 30px; border-radius: var(--radius); box-shadow: var(--shadow-card); text-align: center; transition: var(--transition); border: 1px solid #eee; text-decoration: none; color: var(--text-dark); cursor: pointer;
@@ -638,20 +630,38 @@
         .feature-text h4 { font-size: 1.25rem; margin-bottom: 15px; font-weight: 700; color: var(--text-dark); }
         .feature-text p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
 
-        /* TESTIMONIOS (CARRUSEL INFINITO) */
+        /* ==========================================================
+           MODIFICACIÓN MOVIL: AUTO-SCROLL CON INTERACCIÓN (TESTIMONIOS)
+           ========================================================== */
         #testimonios { background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80') no-repeat center/cover; position: relative; padding: 120px 0; color: var(--white); overflow: hidden; }
         #testimonios::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 51, 102, 0.9); z-index: 1; }
         #testimonios .container { position: relative; z-index: 2; }
         #testimonios .section-title h2 { color: var(--white); }
-        .testimonials-grid-wrapper { width: 100%; overflow: hidden; padding: 20px 0; cursor: grab; }
-        .testimonials-grid { display: flex; width: calc(320px * 16); animation: testimonialScroll 60s linear infinite; will-change: transform; }
-        .testimonials-grid:hover { animation-play-state: paused; cursor: grabbing; }
+        
+        /* Wrapper con scroll habilitado */
+        .testimonials-grid-wrapper { 
+            width: 100%; 
+            overflow-x: auto; /* Permite scroll manual */
+            padding: 20px 0; 
+            cursor: grab;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .testimonials-grid-wrapper::-webkit-scrollbar { display: none; }
+
+        .testimonials-grid { 
+            display: flex; 
+            width: max-content; 
+            animation: none; /* ANIMACIÓN DESACTIVADA - SE USA JS */
+            will-change: transform; 
+        }
+        
+        .testimonials-grid:hover { cursor: grabbing; }
         .testimonial-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.2); text-align: left; height: 100%; width: 320px; margin-right: 30px; flex-shrink: 0; }
         .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 25px; opacity: 0.9; }
         .client-meta { display: flex; align-items: center; gap: 15px; }
         .client-avatar { width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
-        @keyframes testimonialScroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 8)); } }
-
+        
         /* SECCIÓN MARCAS (SLIDER INFINITO CSS - CORRECCIÓN) */
         #marcas {
             background-color: var(--white);
@@ -706,7 +716,7 @@
 
         /* CONTACTO & FAQ */
         .contact-section-wrapper { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-wrap: wrap; }
-        .contact-map-image { flex: 1; min-width: 300px; background: url('./image/image-contacto.jpeg') center/cover; position: relative; min-height: 300px; }
+        .contact-map-image { flex: 1; min-width: 300px; background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80') center/cover; position: relative; min-height: 300px; }
         .contact-map-overlay { position: absolute; top:0; left:0; width: 100%; height: 100%; background: rgba(0, 51, 102, 0.85); display: flex; flex-direction: column; justify-content: center; padding: 40px; color: var(--white); }
         .contact-form-container { flex: 1; min-width: 300px; padding: 50px; }
         @media (max-width: 768px) { .contact-form-container { padding: 30px 20px; } .contact-map-overlay { padding: 30px 20px; } }
@@ -874,8 +884,8 @@
                     <li class="nav-item"><a class="nav-link active" href="#hero">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#diferenciales">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq">Preguntas</a></li>
-                    <li class="nav-item ms-lg-3"><a class="btn btn-nav-cta" href="#contacto">Agendar Visita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#calculadora">Calcular Frigorias</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-nav-cta" href="#contacto">Contactar</a></li>
                 </ul>
             </div>
         </div>
@@ -1211,22 +1221,22 @@
                     </a>
 
                     <!-- DUPLICADOS PARA CARRUSEL INFINITO EN MÓVIL -->
-                    <a href="https://www.instagram.com/refrigeracion.coolpower/" target="_blank" class="red-item">
+                    <a href="#" target="_blank" class="red-item">
                         <i class="fa-brands fa-instagram red-icon insta"></i>
                         <h4>Instagram</h4>
                         <p>Explorá nuestra galería de proyectos y consejos visuales.</p>
                     </a>
-                    <a href="https://www.tiktok.com/@refri_coolpower" target="_blank" class="red-item">
+                    <a href="#" target="_blank" class="red-item">
                         <i class="fa-brands fa-tiktok red-icon tiktok"></i>
                         <h4>TikTok</h4>
                         <p>Descubrí tips rápidos y tutoriales del detrás de escena.</p>
                     </a>
-                    <a href="https://www.facebook.com/profile.php?id=100056367290893&mibextid=ZbWKwL" target="_blank" class="red-item">
+                    <a href="#" target="_blank" class="red-item">
                         <i class="fa-brands fa-facebook-f red-icon facebook"></i>
                         <h4>Facebook</h4>
                         <p>Unite a nuestra comunidad para recibir novedades y ver reseñas.</p>
                     </a>
-                    <a href="https://wa.me/543764820719" target="_blank" class="red-item">
+                    <a href="https://wa.me/541155555555" target="_blank" class="red-item">
                         <i class="fa-brands fa-whatsapp red-icon whatsapp"></i>
                         <h4>WhatsApp</h4>
                         <p>Comunicación directa e inmediata para consultas.</p>
@@ -1460,7 +1470,7 @@
                         bottom: 50%; 
                         left: 50%; 
                         transform: translateX(-50%); 
-                        background-color: #28a745; 
+                        background-color: #276ffe; 
                         color: white; 
                         padding: 25px 40px; 
                         border-radius: 5px; 
@@ -1575,7 +1585,7 @@
                         <li><a href="#hero">Inicio</a></li>
                         <li><a href="#servicios">Servicios</a></li>
                         <li><a href="#contacto">Contacto</a></li>
-                        <li><a href="#faq">Preguntas</a></li>
+                        <li><a href="#calculadora">Calcular Frigorias</a></li>
                     </ul>
                 </div>
                 
@@ -1589,7 +1599,7 @@
             </div>
             
             <div class="copyright">
-                &copy; 2023 COOLPOWERrefrigeración. Todos los derechos reservados.
+                &copy; 2025 COOLPOWERrefrigeración. Todos los derechos reservados.
             </div>
         </div>
     </footer>
@@ -1657,6 +1667,57 @@
             resultText.innerHTML = `Para este ambiente se recomienda un equipo de aproximadamente <span class="calc-highlight">${frigoriasFinales}</span> frigorías.`;
             resultBox.style.display = 'block';
         }
+
+        // ==========================================================
+        // SCRIPT NUEVO: AUTO-SCROLL CON INTERRUPCIÓN TÁCTIL (MÓVIL)
+        // ==========================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Seleccionamos los contenedores que queremos mover automáticamente
+            const carousels = [
+                { element: document.querySelector('.services-track-wrapper') },
+                { element: document.querySelector('.redes-track-wrapper') },
+                { element: document.querySelector('.testimonials-grid-wrapper') }
+            ];
+
+            carousels.forEach(carousel => {
+                const el = carousel.element;
+                if (!el) return;
+
+                let isPaused = false;
+                let scrollSpeed = 0.5; // Velocidad del movimiento (ajustar si es necesario)
+                
+                function autoScroll() {
+                    // Solo ejecutar si no está pausado y estamos en móvil (ancho < 768)
+                    if (!isPaused && window.innerWidth <= 768) {
+                        el.scrollLeft += scrollSpeed;
+                        
+                        // Lógica de Bucle Infinito:
+                        // Cuando llegamos a la mitad del contenido duplicado, volvemos al principio imperceptiblemente.
+                        // Usamos una tolerancia de 1px.
+                        if (el.scrollLeft >= (el.scrollWidth / 2)) {
+                           el.scrollLeft = 0; 
+                        }
+                    }
+                    requestAnimationFrame(autoScroll);
+                }
+
+                // Iniciar el bucle de animación
+                requestAnimationFrame(autoScroll);
+
+                // Detectar interacción del usuario para PAUSAR
+                // Al tocar con el dedo
+                el.addEventListener('touchstart', () => { isPaused = true; });
+                
+                // Al soltar el dedo, esperamos 2 segundos y reanudamos
+                el.addEventListener('touchend', () => { 
+                    setTimeout(() => { isPaused = false; }, 2000); 
+                });
+                
+                // Para probar en escritorio con mouse (opcional)
+                el.addEventListener('mouseenter', () => { isPaused = true; });
+                el.addEventListener('mouseleave', () => { isPaused = false; });
+            });
+        });
     </script>
 
     <!-- ENVIOS DE DATOS DEL FORMULARIO -->
@@ -1696,7 +1757,7 @@
                     // Éxito:
 
                     // 1. Muestra el Toast
-                    toast.style.backgroundColor = '#0f49db'; // Éxito
+                    toast.style.backgroundColor = '#276ffe'; // Éxito
                     toast.textContent = ' ✅ ¡Su Mensaje se Envio con Éxito... Nos Comunicaremos a la brevedad con usted!';
                     toast.style.opacity = '1';
 
